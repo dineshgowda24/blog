@@ -1,0 +1,441 @@
+baseURL: 'https://example.com/'
+title: Dinesh Gowda
+languageCode: en
+hasCJKLanguage: false
+copyright: ''
+theme: meme
+newContentEditor: ''
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+pluralizeListTitles: false
+summaryLength: 42
+enableEmoji: true
+footnoteReturnLinkContents: ↩
+enableGitInfo: false
+enableRobotsTXT: true
+paginate: 5
+disablePathToLower: false
+relativeURLs: false
+uglyURLs: false
+permalinks:
+  categories: '/categories/:slug/'
+  tags: '/tags/:slug/'
+taxonomies:
+  category: categories
+  tag: tags
+frontmatter:
+  lastmod:
+    - lastmod
+    - ':git'
+    - ':fileModTime'
+    - ':default'
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xHTML: false
+  highlight:
+    codeFences: true
+    guessSyntax: false
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 6
+    ordered: true
+minify:
+  tdewolff:
+    html:
+      keepWhitespace: false
+author:
+  name: dinesh gowda
+  email: dinesh240894[at]gmail.com
+  motto:
+  avatar: /icons/apple-touch-icon.png
+  website: 'https://io-oi.me/'
+  twitter: dineshgowda24
+  linkedin: dineshgowdac
+related:
+  threshold: 80
+  includeNewer: true
+  toLower: true
+  indices:
+    - name: categories
+      weight: 100
+    - name: tags
+      weight: 95
+    - name: date
+      weight: 10
+      pattern: '2006'
+mediaTypes:
+  application/atom+xml:
+    suffixes:
+      - xml
+outputFormats:
+  SectionsAtom:
+    mediaType: application/atom+xml
+    baseName: atom
+  SectionsRSS:
+    mediaType: application/rss+xml
+    baseName: rss
+  SearchIndex:
+    mediaType: application/json
+    baseName: search
+  Algolia:
+    mediaType: application/json
+    baseName: algolia
+    isPlainText: true
+    notAlternative: true
+outputs:
+  page:
+    - HTML
+  home:
+    - HTML
+    - SectionsAtom
+    - SectionsRSS
+    - SearchIndex
+  section:
+    - HTML
+  taxonomy:
+    - HTML
+  term:
+    - HTML
+services:
+  rss:
+    limit: -1
+menu:
+  main:
+    - pageref: /posts/
+      name: Posts
+      weight: 2
+      pre: internal
+      post: archive
+#    - pageref: /categories/
+#      name: Categories
+#      weight: 3
+#      pre: internal
+#      post: th
+    - pageref: /tags/
+      name: Tags
+      weight: 4
+      pre: internal
+      post: tags
+    - pageref: /about/
+      name: About
+      weight: 5
+      pre: internal
+      post: user-circle
+    - weight: 6
+      identifier: theme-switcher
+    - weight: 7
+      identifier: lang-switcher
+    - weight: 8
+      identifier: search
+      post: search
+params:
+  enableHeader: true
+  enableHeaderAutoHide: false
+  displayHeaderInHome: true
+  headerBackground: >-
+    linear-gradient(90deg, #f795331a 0, #f370551a 15%, #ef4e7b1a 30%, #a166ab1a
+    44%, #5073b81a 58%, #1098ad1a 72%, #07b39b1a 86%, #6dba821a 100%)
+  headerLayout: flex
+  enableNavToggle: true
+  navHeight: 10em
+  siteBrandSVG: false
+  siteBrandSVGWidth: 250
+  siteBrandSVGHeight: 100
+  siteBrandSVGFill: '#fff'
+  siteBrandFontSize: 1
+  siteBrandFontColor: var(--color-contrast-high)
+  enableMenu: true
+  displayMenuInHome: true
+  activeInSection: false
+  homeLayout: posts
+  homePoetry: []
+  homeLinksPadding: 1
+  homePoster: ''
+  homeVideoWebm: ''
+  homeVideoMp4: ''
+  homeLogo: ''
+  homeLogoLink: ''
+  homeTitle: ''
+  homeMotto: ''
+  homeDescription: ''
+  homeKeywords: ''
+  homeLinksDelimiter: ''
+  siteLogo: /icons/apple-touch-icon.png
+  siteDescription: Articles, Experiences and Rants.
+  siteCreatedTime: '1969-07-20T20:17:43+00:00'
+  siteTwitter: dineshgowda24
+  categoryBy: categories
+  enableTree: true
+  displayPosts: true
+  displayPostsCount: true
+  limitPostsLimit: -1
+  enableTagCloud: true
+  fontUnit: em
+  largestFontSize: 2.5
+  smallestFontSize: 1
+  listWidth: 36
+  displayListTitle: true
+  listDateFormat: January 2
+  listDatePosition: right
+  groupByMonth: true
+  chineseZodiac: false
+  i18nYear: true
+  i18nMonth: false
+  displayTaxonomyTermCount: true
+  limitEntriesLimit: -1
+  includeContent: true
+  enableDarkMode: true
+  defaultTheme: light
+  hideThemeToggle: false
+  hideThemeToggleInHome: false
+  overrideSystemPreferences: false
+  themeColor: '#fff'
+  themeColorDark: '#16171d'
+  safariMaskColor: '#2a6df4'
+  msApplicationTileColor: '#fff'
+  jsonLD: true
+  openGraph: true
+  twitterCards: true
+  autoDetectImages: true
+  enableServiceWorker: false
+  enableKaTeX: false
+  enableMathJax: false
+  disableMathJaxMenu: false
+  enableMermaid: false
+  mermaidTheme: default
+  mermaidThemeDark: dark
+  enableComments: true
+  autoLoadComments: false
+  enableDisqus: false
+  disqusShortname: ''
+  enableValine: false
+  valineAppId: ''
+  valineAppKey: ''
+  valinePlaceholder: Just go go
+  valinePath: ''
+  valineAvatar: mm
+  valineMeta:
+    - nick
+    - mail
+    - link
+  valinePageSize: 10
+  valineLang: en
+  valineVisitor: false
+  valineHighlight: true
+  valineAvatarForce: false
+  valineRecordIP: false
+  valineServerURLs: ''
+  valineEmojiCDN: ''
+  valineEmojiMaps: {}
+  valineEnableQQ: false
+  valineRequiredFields: []
+  enableUtterances: false
+  utterancesRepo: ''
+  utterancesIssueTerm: pathname
+  utterancesTheme: github-light
+  utterancesThemeDark: photon-dark
+  utterancesLabel: ''
+  enableGitalk: false
+  gitalkClientID: your_client_id
+  gitalkClientSecret: your_client_secret
+  gitalkRepo: your_repository
+  gitalkOwner: your_gitalk_owner
+  gitalkAdmin:
+    - your_gitalk_admin
+  gitalkLable:
+    - Gitalk
+  gitalkDistractionFreeMode: false
+  gitalkPerPage: 10
+  gitalkLanguage: en
+  gitalkPagerDirection: last
+  gitalkCreateIssueManually: false
+  gitalkProxy: >-
+    https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token
+  gitalkEnableHotKey: true
+  enableGoogleAnalytics: false
+  trackingCodeType: gtag
+  trackingID: ''
+  googleSiteVerification: ''
+  googleAdClient: ''
+  enableGoogleAutoAds: false
+  enableGoogleAdUnits: false
+  googleAdSlot: ''
+  yandexMetrikaId: ''
+  duration: 0.5
+  primaryColorLight: '220, 90%, 56%'
+  primaryColorDark: '201, 65%, 62%'
+  postWidth: 36
+  original: true
+  displayPostDescription: true
+  enablePostMeta: true
+  enablePostMetaInHome: true
+  postMetaDateFormat: 2006.1.2
+  displayPublishedDate: true
+  publishedDateIcon: calendar-alt
+  displayModifiedDate: false
+  modifiedDateIcon: calendar-check
+  displayExpiredDate: true
+  expiredDateIcon: calendar-times
+  displayCategory: true
+  categoryIcon: folder
+  categoryDelimiter: /
+  displayWordCount: true
+  wordCountIcon: pencil-alt
+  displayReadingTime: true
+  readingTimeIcon: clock
+  displayBusuanziPagePV: false
+  busuanziPagePVIcon: eye
+  hrefTargetBlank: true
+  enableTOC: false
+  displayTOCTitle: true
+  displayTOCNum: true
+  linkHeadingsToTOC: true
+  enableHeadingsAnchor: true
+  headingsOpt: 1-6
+  anchorSymbol: '#'
+  anchorIcon: link
+  enableAnchorLink: true
+  enableAnchorAutoHide: true
+  enableCaption: true
+  captionPrefix: '◎ '
+  enableImageHost: false
+  imageHostURL: 'https://example.com/'
+  headAlso: false
+  enableVideoHost: false
+  videoHostURL: 'https://example.com/'
+  squareBrackets: true
+  footnoteReturnLinkIcon: angle-up
+  insertHrBySelf: true
+  customizeScrollbar: true
+  fontFamilySiteBrand: ''
+  fontFamilyMenu: ''
+  fontFamilyTitle: '''Josefin Sans'', sans-serif'
+  fontFamilyHeadings: '''Josefin Sans'', sans-serif'
+  fontFamilyCode: '''Josefin Sans'', monospace'
+  fontFamilyQuote: ''
+  fontFamilyTOC: ''
+  fontFamilyCaption: ''
+  fontFamilyFooter: ''
+  fontFamilyBody: '''Josefin Sans'', serif'
+  fontsLink: >-
+    https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&display=swap
+  fontSize: 20
+  tabSize: 4
+  lineHeight: 1.618
+  enableParagraphIndent: true
+  indentFirstParagraph: false
+  paragraphStyle: margin
+  enableJustify: false
+  enableDropCap: true
+  enableDropCapAfterHr: false
+  deleteHrBeforeDropCap: false
+  enableSmallCaps: false
+  enableEmphasisPoint: false
+  enableChinesePunctuationGlyphCorrection: false
+  enablePostCopyright: true
+  displayPostCopyright: false
+  enablePostUpdatedBadge: true
+  displayUpdatedBadge: true
+  enableBadgeTitle: false
+  badgeTitlePrefix: 'Updated @ '
+  enablePostGitInfo: false
+  displayPostGitInfo: false
+  repoURL: ''
+  repoEditURL: ''
+  gitIcon: code-branch
+  displayCommitHash: true
+  displayCommitMessage: true
+  msgIcon: info
+  displayFeedback: true
+  feedbackIcon: question
+  feedbackText: Feedback
+  displayEditLink: true
+  editIcon: edit
+  editText: Edit Me?
+  enablePostShare: true
+  displayPostShare: true
+  displayShareOnText: false
+  shareOnTwitter: true
+  shareOnFacebook: false
+  shareOnLinkedIn: true
+  shareOnTelegram: true
+  shareOnWeibo: false
+  shareOnDouban: false
+  shareOnQQ: false
+  shareOnQzone: false
+  shareViaQRCode: false
+  enableRelatedPosts: true
+  displayRelatedPosts: true
+  relatedPostsNumber: 5
+  relatedPostsIcon: plus-circle
+  enablePostTags: true
+  postTagsIcon: tag
+  enablePostNav: true
+  postNavInSection: true
+  enableMinimalFooter: false
+  enableVerticalBarStructure: false
+  enableAboutPageMinimalFooter: false
+  enableBackToTop: true
+  enableBackToTopAutoHide: true
+  displayBackToTopInHome: true
+  displayBackToTopOnMobile: false
+  backToTopIcon: arrow-up
+  enableFooter: true
+  displayFooter: true
+  displayFooterInHome: true
+  displayCopyleftSymbol: false
+  displayCopyrightSymbol: true
+  displaySiteCreatedYear: false
+  iconBetweenYearAndAuthor: heart
+  iconColor: '#f06292'
+  iconAnimation: true
+  displayPoweredBy: true
+  displaySiteCopyright: true
+  customFooter: ''
+  displayBusuanziSiteUVAndPV: false
+  busuanziSiteUVText: Site UV
+  busuanziSiteUVIcon: user
+  busuanziSitePVText: Site PV
+  busuanziSitePVIcon: eye
+  enableSocials: true
+  enableLangToggle: false
+  hideLangToggleInHome: false
+  autoHideLangToggle: true
+  enableHighlight: true
+  enableOverflowY: true
+  maxHeight: 20
+  enableCopy: true
+  enableCopyAutoHide: true
+  enableFingerprint: true
+  enableSRI: false
+  enableForceHTTPS: false
+  enableSmoothScroll: true
+  enableMediumZoom: true
+  enableInstantPage: true
+  enableLunrSearch: true
+  enableAlgoliaSearch: false
+  algoliaAppId: ''
+  algoliaApiKey: ''
+  algoliaIndexName: ''
+  fofPoster: ''
+  fofVideoWebm: ''
+  fofVideoMp4: ''
