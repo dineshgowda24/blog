@@ -20,12 +20,12 @@ Lead backend engineer @ Colearn.
 
 ### What can I do for you?
 
-#### Systems
-- Build systems from scratch
-- Improve existing systems
-- Refactor and rewrite legacy systems
-- Data migrations
-- Architectures like event driven, RPCs, mobile and web backend.
+- #### Systems
+  - Build systems from scratch
+  - Improve existing systems
+  - Refactor and rewrite legacy systems
+  - Data migrations
+  - Architectures like event driven, RPCs, mobile and web backend.
 
 ### Tech stacks that I am good at
 

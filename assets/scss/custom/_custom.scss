@@ -1,0 +1,8 @@
+h1, h2, h3, h4, h5, h6 {
+    margin: 0.8em 0 0.8em;
+    color: var(--color-contrast-higher);
+    a {
+        text-decoration: none !important;
+        color: var(--color-contrast-higher);
+    }
+}

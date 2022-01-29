@@ -328,17 +328,17 @@ params:
   customizeScrollbar: true
   fontFamilySiteBrand: ''
   fontFamilyMenu: ''
-  fontFamilyTitle: '''Josefin Sans'', sans-serif'
-  fontFamilyHeadings: '''Josefin Sans'', sans-serif'
-  fontFamilyCode: '''Josefin Sans'', monospace'
+  fontFamilyTitle: '''Bona Nova'', sans-serif'
+  fontFamilyHeadings: '''Bona Nova'', sans-serif'
+  fontFamilyCode: '''Bona Nova'', monospace'
   fontFamilyQuote: ''
   fontFamilyTOC: ''
   fontFamilyCaption: ''
   fontFamilyFooter: ''
-  fontFamilyBody: '''Josefin Sans'', serif'
+  fontFamilyBody: '''Bona Nova'', serif'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&display=swap
-  fontSize: 20
+    https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&display=swap
+  fontSize: 18
   tabSize: 4
   lineHeight: 1.618
   enableParagraphIndent: true
