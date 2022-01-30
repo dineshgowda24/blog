@@ -25,11 +25,11 @@ Lead backend engineer @ Colearn.
   - Improve existing systems
   - Refactor and rewrite legacy systems
   - Data migrations
-  - Architectures like event driven, RPCs, mobile and web backend.
+  - Architectures like event driven, RPCs, mobile and web backend
 
 ### Tech stacks that I am good at
 
-- Go, Python and Ruby. Django and Rails recently.
+- Go, Python and Ruby. Django and Rails recently
 - Web Application Development, APIs, gRPC, Twirp, Protocol buffers
 - Postgres, Redis and MongoDB
 - RabbitMQ, Kafka
