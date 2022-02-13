@@ -328,16 +328,18 @@ params:
   customizeScrollbar: true
   fontFamilySiteBrand: ''
   fontFamilyMenu: ''
-  fontFamilyTitle: '''Bona Nova'', sans-serif'
-  fontFamilyHeadings: '''Bona Nova'', sans-serif'
-  fontFamilyCode: '''Bona Nova'', monospace'
-  fontFamilyQuote: ''
-  fontFamilyTOC: ''
-  fontFamilyCaption: ''
-  fontFamilyFooter: ''
-  fontFamilyBody: '''Bona Nova'', serif'
+  fontFamilyTitle: '''Lora'', sans-serif'
+  fontFamilyHeadings: '''Lora'', sans-serif'
+  fontFamilyCode: 'Fira Code'
+  fontFamilyQuote: 'Amiri'
+  fontFamilyTOC: 'Amiri'
+  fontFamilyCaption: 'Amiri'
+  fontFamilyFooter: 'Amiri'
+  fontFamilyBody: '''Amiri'', serif'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&display=swap
+    https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap
+    https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap
   fontSize: 18
   tabSize: 4
   lineHeight: 1.618
@@ -439,3 +441,6 @@ params:
   fofPoster: ''
   fofVideoWebm: ''
   fofVideoMp4: ''
+https://fonts:
+  googleapis:
+    com/css?family=PT+Mono|Spectral:300,400,600,800:
