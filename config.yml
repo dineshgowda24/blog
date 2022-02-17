@@ -14,7 +14,7 @@ footnoteReturnLinkContents: ↩
 enableGitInfo: false
 enableRobotsTXT: true
 paginate: 5
-disablePathToLower: false
+disablePathToLower: true
 relativeURLs: false
 uglyURLs: false
 permalinks:
@@ -50,7 +50,7 @@ markup:
       xHTML: false
   highlight:
     codeFences: true
-    guessSyntax: false
+    guessSyntax: true
     lineNos: true
     lineNumbersInTable: true
     noClasses: false
@@ -67,7 +67,7 @@ author:
   email: dinesh240894[at]gmail.com
   motto:
   avatar: /icons/apple-touch-icon.png
-  website: 'https://io-oi.me/'
+  website: 'https://dinesh.wiki/'
   twitter: dineshgowda24
   linkedin: dineshgowdac
 related:
@@ -125,11 +125,11 @@ menu:
       weight: 2
       pre: internal
       post: archive
-#    - pageref: /categories/
-#      name: Categories
-#      weight: 3
-#      pre: internal
-#      post: th
+    - pageref: /categories/
+      name: Categories
+      weight: 3
+      pre: internal
+      post: th
     - pageref: /tags/
       name: Tags
       weight: 4
@@ -283,7 +283,7 @@ params:
   duration: 0.5
   primaryColorLight: '220, 90%, 56%'
   primaryColorDark: '201, 65%, 62%'
-  postWidth: 36
+  postWidth: 50
   original: true
   displayPostDescription: true
   enablePostMeta: true
@@ -340,7 +340,7 @@ params:
     https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap
     https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap
     https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap
-  fontSize: 18
+  fontSize: 16
   tabSize: 4
   lineHeight: 1.618
   enableParagraphIndent: true
@@ -370,7 +370,7 @@ params:
   displayFeedback: true
   feedbackIcon: question
   feedbackText: Feedback
-  displayEditLink: true
+  displayEditLink: false
   editIcon: edit
   editText: Edit Me?
   enablePostShare: true
@@ -424,7 +424,7 @@ params:
   autoHideLangToggle: true
   enableHighlight: true
   enableOverflowY: true
-  maxHeight: 20
+  maxHeight: 50
   enableCopy: true
   enableCopyAutoHide: true
   enableFingerprint: true
