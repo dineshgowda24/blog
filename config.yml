@@ -326,17 +326,19 @@ params:
   footnoteReturnLinkIcon: angle-up
   insertHrBySelf: true
   customizeScrollbar: true
-  fontFamilySiteBrand: ''
-  fontFamilyMenu: ''
-  fontFamilyTitle: '''Lora'', sans-serif'
-  fontFamilyHeadings: '''Lora'', sans-serif'
+  fontFamilySiteBrand: 'Spectral'
+  fontFamilyMenu: 'Spectral'
+  fontFamilyTitle: 'Spectral'
+  fontFamilyHeadings: 'Spectral'
   fontFamilyCode: 'Fira Code'
-  fontFamilyQuote: 'Amiri'
-  fontFamilyTOC: 'Amiri'
-  fontFamilyCaption: 'Amiri'
-  fontFamilyFooter: 'Amiri'
-  fontFamilyBody: '''Amiri'', serif'
+  fontFamilyQuote: 'Spectral'
+  fontFamilyTOC: 'Spectral'
+  fontFamilyCaption: 'Spectral'
+  fontFamilyFooter: 'Spectral'
+  fontFamilyBody: 'Spectral'
   fontsLink: >-
+    https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&display=swap
+    https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap
     https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap
     https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap
     https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap
