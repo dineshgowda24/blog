@@ -9,10 +9,10 @@ displayCopyright: false
 
 Hey there!
 I am Dinesh. 
-Polygot programmer @ Colearn.
-Lead backend engineer with a focus on web application development in the Go, Python and Ruby ecosystems.
+Polyglot programmer @ Colearn.
+I am a Lead backend engineer focusing on web application development in the Go, Python and Ruby ecosystems.
 
-I peaked my interest in blockchain after reading Andreas Antonopoulos book on Bitcoin and Ethereum. I am learning Solidity now.
+I am curious about databases, and I am currently reading https://sql-performance-explained.com/
 
 # Now
 
@@ -21,11 +21,12 @@ Lead backend engineer @ Colearn.
 ### What can I do for you?
 
 - #### Systems
+
   - Build systems from scratch
   - Improve existing systems
   - Refactor and rewrite legacy systems
   - Data migrations
-  - Architectures like event driven, RPCs, mobile and web backend
+  - Architectures like event-driven, RPCs, mobile and web backend
 
 ### Tech stacks that I am good at
 
@@ -36,5 +37,11 @@ Lead backend engineer @ Colearn.
 - GCP with Kubernetes, PubSub, CloudFunction. AWS with ECS, Glue, Lambdas
 
 ### Projects
+
+- Bitcask-rb - https://github.com/dineshgowda24/bitcask-rb
 - Redis lock - https://github.com/dineshgowda24/redislock
 - Kafka Manager - https://github.com/dineshgowda24/kafka_manager
+
+### Open Source Contributions
+
+<https://github.com/rkoval/alfred-aws-console-services-workflow>
