@@ -20,30 +20,28 @@ Say we have several microservices running in production, and each service enclos
 E.g., In an e-commerce domain, a notification service is responsible for sending notifications across various platforms, and it wants to subscribe to all the changes on an `Order` such as `CREATE` or `UPDATE`. 
 Contrarily, another service may only want to subscribe to a change when a `User` is `DELETED` from the system.
 
-
 ### Prerequisites
 
 - Working knowledge of RMQ, SNS, SQS
-- Docker 
+- Docker
 - Go
 - AWS account
 
-
 ### SNS
 
-Amazon Simple Notification Service (Amazon SNS) is a fully managed messaging service for service-to-service and service-to-person communication. 
-The pub/sub functionality provides topics for high-throughput, push-based, many-to-many messaging between microservices and event-driven serverless applications. 
+Amazon Simple Notification Service (Amazon SNS) is a fully managed messaging service for service-to-service and service-to-person communication.
+The pub/sub functionality provides topics for high-throughput, push-based, many-to-many messaging between microservices and event-driven serverless applications.
 
 #### Publishing messages to SNS
 
 Below is an example of `user service`, which is publishing a message to `SNS` when a `user` is `updated`.
-
 We will be publishing a message to an SNS topic with message attributes such as
+
 - Name of the service which published the message: `userservice.`
 - Type of the entity: `user.`
 - Action: `updated`
 
-```go 
+```go
 package main
 
 import (
@@ -138,10 +136,10 @@ These filter policies are just regular `JSON` text. A consumer who wishes to con
 ### SQS
 
 Amazon Simple Queue Service (SQS) is a fully managed message queuing service.
-SQS offers two types of message queues. 
-- Standard queues offer maximum throughput, best-effort ordering, and at least-once delivery. 
-- SQS FIFO queues are designed to guarantee that messages are processed exactly once, in the exact order they are sent.
+SQS offers two types of message queues.
 
+- Standard queues offer maximum throughput, best-effort ordering, and at least-once delivery.
+- SQS FIFO queues are designed to guarantee that messages are processed exactly once, in the exact order they are sent.
 
 #### SQS Consumer
 
@@ -231,9 +229,7 @@ func main() {
 
 ### RMQ
 
-RMQ open source message broker. It supports various protocols such as AMQP 0-9-1, STOMP, MQTT, and AMQP 1.0. It also comes with the support of web-based monitoring built-in. 
-
-The most powerful is the dynamic message routing capability using `topic` exchange.
+RMQ open source message broker. It supports various protocols such as AMQP 0-9-1, STOMP, MQTT, and AMQP 1.0. It also comes with the support of web-based monitoring built-in. The most powerful is the dynamic message routing capability using `topic` exchange.
 
 #### Starting RMQ On Docker
 

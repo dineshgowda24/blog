@@ -11,10 +11,9 @@ Hey there!
 I am Dinesh. 
 Polyglot programmer @ Colearn.
 I am a Lead backend engineer focusing on web application development in the Go, Python and Ruby ecosystems.
+I am curious about databases, and I am currently reading <https://sql-performance-explained.com/>
 
-I am curious about databases, and I am currently reading https://sql-performance-explained.com/
-
-# Now
+### Now
 
 Lead backend engineer @ Colearn.
 
@@ -38,9 +37,9 @@ Lead backend engineer @ Colearn.
 
 ### Projects
 
-- Bitcask-rb - https://github.com/dineshgowda24/bitcask-rb
-- Redis lock - https://github.com/dineshgowda24/redislock
-- Kafka Manager - https://github.com/dineshgowda24/kafka_manager
+- Bitcask-rb - <https://github.com/dineshgowda24/bitcask-rb>
+- Redis lock - <https://github.com/dineshgowda24/redislock>
+- Kafka Manager - <https://github.com/dineshgowda24/kafka_manager>
 
 ### Open Source Contributions
 

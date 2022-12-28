@@ -283,7 +283,7 @@ params:
   duration: 0.5
   primaryColorLight: '220, 90%, 56%'
   primaryColorDark: '201, 65%, 62%'
-  postWidth: 50
+  postWidth: 45
   original: true
   displayPostDescription: true
   enablePostMeta: true
@@ -337,12 +337,12 @@ params:
   fontFamilyFooter: 'Spectral'
   fontFamilyBody: 'Spectral'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&display=swap
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap
+    https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap
     https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap
     https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap
     https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap
-    https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap
-  fontSize: 16
+  fontSize: 17
   tabSize: 4
   lineHeight: 1.618
   enableParagraphIndent: true
