@@ -217,8 +217,8 @@ params:
   twitterCards: true
   autoDetectImages: true
   enableServiceWorker: false
-  enableKaTeX: false
-  enableMathJax: false
+  enableKaTeX: true
+  enableMathJax: true
   disableMathJaxMenu: false
   enableMermaid: false
   mermaidTheme: default
@@ -326,23 +326,19 @@ params:
   footnoteReturnLinkIcon: angle-up
   insertHrBySelf: true
   customizeScrollbar: true
-  fontFamilySiteBrand: 'Spectral'
-  fontFamilyMenu: 'Spectral'
-  fontFamilyTitle: 'Spectral'
-  fontFamilyHeadings: 'Spectral'
+  fontFamilySiteBrand: 'Lora'
+  fontFamilyMenu: 'Lora'
+  fontFamilyTitle: 'Lora'
+  fontFamilyHeadings: 'Lora'
+  fontFamilyQuote: 'Lora'
+  fontFamilyTOC: 'Lora'
+  fontFamilyCaption: 'Lora'
+  fontFamilyFooter: 'Lora'
+  fontFamilyBody: 'Lora'
   fontFamilyCode: 'Fira Code'
-  fontFamilyQuote: 'Spectral'
-  fontFamilyTOC: 'Spectral'
-  fontFamilyCaption: 'Spectral'
-  fontFamilyFooter: 'Spectral'
-  fontFamilyBody: 'Spectral'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap
-    https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap
-    https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap
-    https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap
-    https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap
-  fontSize: 17
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&display=swap&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap
+  fontSize: 19
   tabSize: 4
   lineHeight: 1.618
   enableParagraphIndent: true
@@ -443,6 +439,3 @@ params:
   fofPoster: ''
   fofVideoWebm: ''
   fofVideoMp4: ''
-https://fonts:
-  googleapis:
-    com/css?family=PT+Mono|Spectral:300,400,600,800:
