@@ -8,14 +8,14 @@ displayCopyright: false
 ---
 
 Hey there!
-I am Dinesh. 
-Polyglot programmer @ Colearn.
+I am Dinesh.
+Polyglot programmer @Colearn.
 I am a Lead backend engineer focusing on web application development in the Go, Python and Ruby ecosystems.
 I am curious about databases, and I am currently reading <https://sql-performance-explained.com/>
 
 ### Now
 
-Lead backend engineer @ Colearn.
+Lead backend engineer @Colearn.
 
 ### What can I do for you?
 
