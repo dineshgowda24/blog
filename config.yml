@@ -225,8 +225,8 @@ params:
   mermaidThemeDark: dark
   enableComments: true
   autoLoadComments: true
-  enableDisqus: false
-  disqusShortname: ''
+  enableDisqus: true
+  disqusShortname: 'dinesh-wiki'
   enableValine: false
   valineAppId: ''
   valineAppKey: ''
