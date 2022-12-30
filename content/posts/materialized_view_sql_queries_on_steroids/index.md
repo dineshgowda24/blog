@@ -2,6 +2,8 @@
 title: "Materialized View: SQL Queries on Steroids"
 date: 2022-12-29T01:51:11+04:00
 draft: false
+categories: [databases]
+tags: [sql, postgres, performance]
 ---
 
 I have been working with a client with close to 600k images on their home page. The photos are tagged with multiple categories. The index API returns paginated pictures based on various sets of filters on classes.
