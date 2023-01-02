@@ -259,6 +259,14 @@ Materialized views can become a great resource and lead to significant performan
 
 ### Note
 
-Thank you for coming this far. I hope you enjoyed the content. 
+This post has been getting much attention over Lobste, Hacker News, Reddit and Twitter.
 
-I am a polyglot programmer interested in databases, and I have implemented a project to build your persistent key-value store based on bitcask paper. Please check it out at https://github.com/dineshgowda24/bitcask-rb.
+It's been featured in a few places
+
+1. [DevOps Bulletin Issue - Jan 2023](https://www.devopsbulletin.com/issues/devops-stories-to-start-fresh-in-the-new-year)
+2. [Ruby Weekly](https://twitter.com/RubyDiscussions/status/1609896550158766080?s=20)
+3. [Ruby Lib Hunt](https://twitter.com/RubyLibHunt/status/1609129067252682753?s=20)
+
+_Thank you for all the suggestions and feedback :-)_
+
+_I am a polyglot programmer interested in databases, and I have implemented a project to build your persistent key-value store based on bitcask paper. Please check it out at https://github.com/dineshgowda24/bitcask-rb._
