@@ -5,6 +5,7 @@ draft: false
 type: about
 share: false
 displayCopyright: false
+toc: false
 ---
 
 Hey there!
