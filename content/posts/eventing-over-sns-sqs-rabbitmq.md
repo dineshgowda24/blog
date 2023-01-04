@@ -32,7 +32,7 @@ Contrarily, another service may only want to subscribe to a change when a `User`
 Amazon Simple Notification Service (Amazon SNS) is a fully managed messaging service for service-to-service and service-to-person communication.
 The pub/sub functionality provides topics for high-throughput, push-based, many-to-many messaging between microservices and event-driven serverless applications.
 
-#### Publishing messages to SNS
+#### Publishing Messages
 
 Below is an example of `user service`, which is publishing a message to `SNS` when a `user` is `updated`.
 We will be publishing a message to an SNS topic with message attributes such as
@@ -112,7 +112,7 @@ func getMessageAttributes(sender, entityName, action string) map[string]*sns.Mes
 }
 ```
 
-#### SNS Subscription & filter policy
+#### Subscription & Filter Policy
 
 SNS subscription offers a subscription mechanism to send messages to `SQS`.
 Filter policies are the cherry on top, allowing an application to filter specific messages based on attributes.
@@ -141,7 +141,7 @@ SQS offers two types of message queues.
 - Standard queues offer maximum throughput, best-effort ordering, and at least-once delivery.
 - SQS FIFO queues are designed to guarantee that messages are processed exactly once, in the exact order they are sent.
 
-#### SQS Consumer
+#### Consumer
 
 Once a service sets up SQS with a subscription and filter policy. We would need the queue URL to consume. Below is an example of consumer messages from `SQS`.
 
@@ -231,7 +231,7 @@ func main() {
 
 RMQ open source message broker. It supports various protocols such as AMQP 0-9-1, STOMP, MQTT, and AMQP 1.0. It also comes with the support of web-based monitoring built-in. The most powerful is the dynamic message routing capability using `topic` exchange.
 
-#### Starting RMQ On Docker
+#### Running On Docker
 
 ```shell
 docker run -d --hostname rmq --name rmq -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=root rabbitmq:3-management
