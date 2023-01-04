@@ -19,21 +19,19 @@ Lead backend engineer @Colearn.
 
 ### What can I do for you?
 
-- #### Systems
-
-  - Build systems from scratch
-  - Improve existing systems
-  - Refactor and rewrite legacy systems
-  - Data migrations
-  - Architectures like event-driven, RPCs, mobile and web backend
+- Build systems from scratch.
+- Improve existing systems.
+- Refactor and rewrite legacy systems.
+- Data migrations.
+- Architectures like event-driven, RPCs, mobile and web backend.
 
 ### Tech stacks that I am good at
 
-- Go, Python and Ruby. Django and Rails recently
-- Web Application Development, APIs, gRPC, Twirp, Protocol buffers
-- Postgres, Redis and MongoDB
-- RabbitMQ, Kafka
-- GCP with Kubernetes, PubSub, CloudFunction. AWS with ECS, Glue, Lambdas
+- Go, Python and Ruby. Django and Rails recently.
+- Web Application Development, APIs, gRPC, Twirp, Protocol buffers.
+- Postgres, Redis and MongoDB.
+- RabbitMQ, Kafka.
+- GCP with Kubernetes, PubSub, CloudFunction. AWS with ECS, Glue, Lambdas.
 
 ### Projects
 
