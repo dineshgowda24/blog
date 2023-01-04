@@ -35,10 +35,10 @@ Lead backend engineer @Colearn.
 
 ### Projects
 
-- Bitcask-rb - <https://github.com/dineshgowda24/bitcask-rb>
-- Redis lock - <https://github.com/dineshgowda24/redislock>
-- Kafka Manager - <https://github.com/dineshgowda24/kafka_manager>
+- [Bitcask - Ruby](https://github.com/dineshgowda24/bitcask-rb)
+- [Redis Lock - Golang](https://github.com/dineshgowda24/redislock)
+- [Kafka Manager- Golang](https://github.com/dineshgowda24/kafka_manager)
 
 ### Open Source Contributions
 
-<https://github.com/rkoval/alfred-aws-console-services-workflow>
+- [Alfred AWS Console Services Workflow - Golang](https://github.com/rkoval/alfred-aws-console-services-workflow)
