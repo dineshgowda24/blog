@@ -2,7 +2,7 @@
 title: "Build Your Own Fast, Persistant KV Store"
 description: ""
 date: 2023-01-03T18:15:37+04:00
-draft: false
+draft: true
 categories: [databases]
 tags: [key-value, performance, bitcask, diy]
 ---
