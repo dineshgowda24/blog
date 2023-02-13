@@ -28,23 +28,6 @@ ORDER BY images.id
 OFFSET <offset_page> LIMIT 10
 ```
 
-
-```postgres
-SELECT DISTINCT ON (images.id) external_uuid
-FROM images
-         JOIN images_chapters qc ON images.id = qc.image_id
-         JOIN chapters c ON c.id = qc.chapter_id
-         JOIN images_sections qs ON images.id = qs.image_id
-         JOIN sections s ON s.id = qs.section_id
-         JOIN images_subjects qs2 ON images.id = qs2.image_id
-         JOIN subjects s2 ON s2.id = qs2.subject_id
-         JOIN images_topics qt ON images.id = qt.image_id
-         JOIN topics t ON t.id = qt.topic_id
-WHERE s.name = 'ABSTRACT'
-ORDER BY images.id
-OFFSET <offset_page> LIMIT 10
-```
-
 The count on the actual category tables is meagre <5k rows per table. The join tables have mostly 1(images):1(categories) mapping. Meaning every image has at least been tagged into 4 categories. If our filter predicate results in 100k images, we are essentially joining 5 tables ( images + 4 classes) of 100k each.
 
 ### Let's break down the EXPLAIN statement
