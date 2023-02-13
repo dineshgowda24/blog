@@ -12,7 +12,24 @@ Recently, they normalized their data, and every image was mapped to 4 different 
 
 Below is the query that filters the images tagged `ABSTRACT` for a page and limit results to 10.
 
-```sql
+```postgres
+SELECT DISTINCT ON (images.id) external_uuid
+FROM images
+         JOIN images_chapters qc ON images.id = qc.image_id
+         JOIN chapters c ON c.id = qc.chapter_id
+         JOIN images_sections qs ON images.id = qs.image_id
+         JOIN sections s ON s.id = qs.section_id
+         JOIN images_subjects qs2 ON images.id = qs2.image_id
+         JOIN subjects s2 ON s2.id = qs2.subject_id
+         JOIN images_topics qt ON images.id = qt.image_id
+         JOIN topics t ON t.id = qt.topic_id
+WHERE s.name = 'ABSTRACT'
+ORDER BY images.id
+OFFSET <offset_page> LIMIT 10
+```
+
+
+```postgres
 SELECT DISTINCT ON (images.id) external_uuid
 FROM images
          JOIN images_chapters qc ON images.id = qc.image_id
@@ -34,7 +51,7 @@ The count on the actual category tables is meagre <5k rows per table. The join t
 
 Below is the result of `EXPLAIN ANALYZE` that filters the images tagged `ABSTRACT` for a specific page, sorts by `images.id`, and returns the first 10 results.
 
-```sql
+```postgres
 Limit  (cost=2256.12..2256.17 rows=10 width=45) (actual time=939.317..939.329 rows=10 loops=1)
   ->  Unique  (cost=2255.87..2257.11 rows=248 width=45) (actual time=939.292..939.324 rows=60 loops=1)
         ->  Sort  (cost=2255.87..2256.49 rows=248 width=45) (actual time=939.291..939.308 rows=64 loops=1)
@@ -80,8 +97,8 @@ Execution time: 941.265 ms
      <td>Node Stats</td>
   </tr>
   <tr>
-    <td><img src="images/per_table_stats.png" alt="Per Table Stats"/></td>
-    <td><img src="images/per_node_stats.png" alt="Per Node Stats"/></td>
+    <td><img src="images/per_table_stats.png" style="border:none;" alt="Per Table Stats"/></td>
+    <td><img src="images/per_node_stats.png"  style="border:none;" alt="Per Node Stats"/></td>
   </tr>
  </table>
 
@@ -123,7 +140,7 @@ If we look at our original query, whatever may be the filter predicate, we are j
 
 So the app service should decide which tables to join based on the filter predicate.
 
-```sql
+```postgres
 EXPLAIN ANALYSE
 SELECT DISTINCT ON (images.id) external_uuid
 FROM images
@@ -181,7 +198,7 @@ Once we create a materialized view, we can use SQL to query snapshots.
 
 #### Creating the materialized view
 
-```sql
+```postgres
 CREATE MATERIALIZED VIEW homepage_images as
 SELECT images.id,
        images.external_uuid,
@@ -209,7 +226,7 @@ FROM images
 
 Now that we have created our materialized, lets query it.
 
-```sql
+```postgres
 SELECT DISTINCT ON (id) external_uuid
 FROM homepage_images
 WHERE section_name = 'ABSTRACT'
@@ -217,7 +234,7 @@ ORDER BY id
 OFFSET <offset_page> LIMIT 10
 ```
 
-```sql
+```postgres
 Limit  (cost=46.04..55.16 rows=10 width=45) (actual time=0.921..0.963 rows=10 loops=1)
   ->  Result  (cost=0.42..55665.11 rows=61011 width=45) (actual time=0.774..0.959 rows=60 loops=1)
         ->  Unique  (cost=0.42..55665.11 rows=61011 width=45) (actual time=0.773..0.950 rows=60 loops=1)
@@ -232,21 +249,21 @@ We got the results in less than <1 ms, which is a significant optimization from 
 
 #### Response times of the homepage post deployment
 
-<img src="images/nr_latency.png" alt="Per Table Stats"/>
+<img src="images/nr_latency.png" style="border:none;" alt="Per Table Stats"/>
 
 The significant difference between querying on tables and materialized view is that materialized view cannot subsequently return real-time results if we insert new rows into an underlying table.
 
 We can update the materialized view using the below query. Note that the below query locks the materialized view and will be unusable until refreshed.
 
-```sql
+```postgres
 REFRESH MATERIALIZED VIEW homepage_images
 ```
 
 To refresh the materialized view without locking, you can use `CONCURRENTLY`, but this option requires you to have a unique index on the materialized view.
 
-```sql
+{{< highlight postgresql "linenos=table" >}}
 REFRESH MATERIALIZED VIEW CONCURRENTLY homepage_images
-```
+{{< / highlight >}}
 
 ### Closing notes
 
