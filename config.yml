@@ -184,7 +184,7 @@ params:
   homeDescription: ''
   homeKeywords: ''
   homeLinksDelimiter: ''
-  siteLogo: assets/images/feature.JPG
+  siteLogo: /assets/images/feature.JPG
   siteDescription: Articles, Experiences and Rants.
   siteCreatedTime: '2023-01-01'
   siteTwitter: dineshgowda24
