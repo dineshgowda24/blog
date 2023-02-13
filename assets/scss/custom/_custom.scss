@@ -6,3 +6,10 @@ h1, h2, h3, h4, h5, h6 {
         color: var(--color-contrast-higher);
     }
 }
+
+@font-face {
+    font-family: 'GoMono';
+    font-style: normal;
+    src: local('GoMono Regular'), local('GoMono-Regular'),
+         url('/fonts/Go-Mono-for-Powerline.woff') format('woff'),
+}

@@ -288,7 +288,7 @@ params:
   duration: 0.5
   primaryColorLight: '220, 90%, 56%'
   primaryColorDark: '201, 65%, 62%'
-  postWidth: 45
+  postWidth: 50
   original: true
   displayPostDescription: true
   enablePostMeta: true
@@ -340,7 +340,7 @@ params:
   fontFamilyCaption: 'Spectral'
   fontFamilyFooter: 'Spectral'
   fontFamilyBody: 'Spectral'
-  fontFamilyCode: 'Fira Code'
+  fontFamilyCode: 'GoMono'
   fontsLink: >-
     https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap
   fontSize: 17

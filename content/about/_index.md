@@ -8,15 +8,17 @@ displayCopyright: false
 toc: false
 ---
 
+<img src="featured.JPG" style="margin: 15px 0px 0px 15px; float: right; border-radius: 50%;" width="300" height="300" alt="dp"/>
+
 Hey there!
 I am Dinesh.
 Polyglot programmer @Colearn.
 I am a Lead backend engineer focusing on web application development in the Go, Python and Ruby ecosystems.
-I am curious about databases, and I am currently reading <https://sql-performance-explained.com/>
+I am curious about databases, and I am currently reading <https://sql-performance-explained.com/> 
 
 ### Now
 
-Lead backend engineer @Colearn.
+Lead backend engineer @Colearn, Abu Dabhi.
 
 ### What can I do for you?
 
