@@ -105,7 +105,7 @@ $${\large{\mathsf{\max_{\substack{\mathsf{1<x<2^{x}-1}}} f(x)}}}  \textsf{where 
 
 As our `keysize` or `valuesize` are 4 bytes(32 bits) unsigned integers. The largest value of key or value that we can store is 
 
-$${{\mathsf{ 2^{32-1}} = \textsf{4294967296 bytes =  4.2 GB}}}$$
+$${{\mathsf{ 2^{32-1}} = \textsf{4294967295 bytes =  4.29 GB}}}$$
 
 ### Stiching Everything
 
