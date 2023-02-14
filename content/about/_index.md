@@ -5,7 +5,10 @@ draft: false
 type: about
 share: false
 displayCopyright: false
+displayPublishedDate: false
+displayWordCount: false
 toc: false
+description: "Articles, Experiences and Rants"
 ---
 
 <img src="featured.JPG" style="margin: 15px 0px 0px 15px; float: right; border-radius: 50%;" width="300" height="300" alt="dp"/>
