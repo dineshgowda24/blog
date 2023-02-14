@@ -59,7 +59,7 @@ To preserve type information, let's store two more fields, `keytype` and `valuet
 
 For auditing and security, bitcask suggests storing 32-bit EPOC timestamp and [CRC(Cyclic Redundancy Check)](https://en.wikipedia.org/wiki/Cyclic_redundancy_check), respectively. These values are generated when data is written to the file.
 
-The final data format would look like something below. We would store 20 bytes of additional data for every key and value. 
+The final data format would look like something below. We would store 20 bytes of additional data for every key and value.
 
 - 1st 4 bytes are a 32-bit integer representing CRC.
 - The following 4 bytes are a 32-bit integer representing EPOC timestamp.
@@ -78,7 +78,7 @@ Computers represent data in sets of binary digits. The representation comprises 
 Suppose we run the below code. What would be the size of the data written in the file?
 
 ```ruby
-File.open('test.txt', 'w') do |file|
+File.open('sample.txt', 'w') do |file|
     [1, 12, 123, 1234, 12345, 123456, 1234567, 12345678].each do |num|
         file.write(num)
     end
@@ -89,18 +89,16 @@ It's **36** bytes because, by default, they are written as strings where each ch
 
 If we encoded them as 4-byte integers and stored them in binary format. The size of the file would **32** bytes.
 
-$${\textit{ 4 * 8 = 32 bytes}}$$
-
-### Algorithm
-
-
+$${\textsf{ 4 * 8 = 32 bytes}}$$
 
 ### Largest Key & Value Size
 
 The largest `key` or `value` stored in file is a function of the type of integer of `keysize` or `valuesize` respectively.
 
-$${\large{\max_{\substack{\mathit{1<x<2^{x}-1}}} f(x)}} \\ \textit{where n is an integer of size x bits}$$
+$${\large{\mathsf{\max_{\substack{\mathsf{1<x<2^{x}-1}}} f(x)}}} \\ \textsf{where x is the size of an integer in bits}$$
 
-As our `keysize` or `valuesize` are 4 bytes(32 bits) unsigned integers. The largest value of key or value stored is
+As our `keysize` or `valuesize` are 4 bytes(32 bits) unsigned integers. The largest value of key or value that we can store is 
 
-$${{\mathit{ 2^{32-1}} = \textit{4294967296 Bytes =  4.2 GB}}}$$
+$${{\mathsf{ 2^{32-1}} = \textsf{4294967296 bytes =  4.2 GB}}}$$
+
+### Algorithm
