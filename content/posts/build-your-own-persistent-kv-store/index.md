@@ -1,6 +1,6 @@
 ---
 title: "Build Your Own Fast, Persistent KV Store"
-description: ""
+description: "https://github.com/dineshgowda24/bitcask-rb"
 date: 2023-02-13T18:15:37+04:00
 draft: false
 categories: [databases]
