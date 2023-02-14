@@ -225,7 +225,7 @@ params:
   enableKaTeX: true
   enableMathJax: true
   disableMathJaxMenu: false
-  enableMermaid: false
+  enableMermaid: true
   mermaidTheme: default
   mermaidThemeDark: dark
   enableComments: true
