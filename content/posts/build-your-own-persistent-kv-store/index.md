@@ -1,5 +1,5 @@
 ---
-title: "Build Your Own Fast, Persistant KV Store"
+title: "Build Your Own Fast, Persistent KV Store"
 description: ""
 date: 2023-02-13T18:15:37+04:00
 draft: false
