@@ -59,12 +59,12 @@ To preserve type information, let's store two more fields, `keytype` and `valuet
 
 #### Auditing & Security
 
-For auditing and security, bitcask suggests storing 32-bit EPOC timestamp and [CRC(Cyclic Redundancy Check)](https://en.wikipedia.org/wiki/Cyclic_redundancy_check), respectively. These values are generated when data is written to the file.
+For auditing and security, bitcask suggests storing 32-bit epoch timestamp and [CRC(Cyclic Redundancy Check)](https://en.wikipedia.org/wiki/Cyclic_redundancy_check), respectively. These values are generated when data is written to the file.
 
 The final data format would look like something below. We would store 20 bytes of additional data for every key and value.
 
 - 1st 4 bytes are a 32-bit integer representing CRC.
-- The following 4 bytes are a 32-bit integer representing EPOC timestamp.
+- The following 4 bytes are a 32-bit integer representing epoch timestamp.
 - The following 8 bytes are two 32-bit integers representing `keysize` and `valuesize`.
 - The next 4 bytes are two 16-bit integers representing `keytype` and `valuetype`.
 - The remaining bytes are our key and value. 
@@ -152,20 +152,20 @@ end
 #### Serialize & Deserialize
 
 1. `serialize` serializes the data to our data format. It identifies the type of data, generates a header and computes crc. It returns the length of the data and the binary encoded data.
-2. `deserialize` does the opposite of `serialize`. It validates crc, decodes the binary encoded data and returns epoc, key and value.
+2. `deserialize` does the opposite of `serialize`. It validates crc, decodes the binary encoded data and returns epoch, key and value.
 
 ```ruby {linenos=table,linenostart=27,title="serializer.rb"}
 module Bitcask
   module Serializer
 
-    def serialize(epoc:, key:, value:)
+    def serialize(epoch:, key:, value:)
       key_type = type(key)
       value_type = type(value)
 
       key_bytes = pack(key, key_type)
       value_bytes = pack(value, value_type)
 
-      header = serialize_header(epoc: epoc, keysz: key_bytes.length, key_type: key_type, value_type: value_type,
+      header = serialize_header(epoch: epoch, keysz: key_bytes.length, key_type: key_type, value_type: value_type,
                                 valuesz: value_bytes.length)
       data = key_bytes + value_bytes
 
@@ -175,15 +175,15 @@ module Bitcask
     def deserialize(data)
       return 0, '', '' unless crc32_valid?(desearlize_crc32(data[..crc32_offset - 1]), data[crc32_offset..])
 
-      epoc, keysz, valuesz, key_type, value_type = deserialize_header(data[crc32_offset..crc32_header_offset - 1])
+      epoch, keysz, valuesz, key_type, value_type = deserialize_header(data[crc32_offset..crc32_header_offset - 1])
       key_bytes = data[crc32_header_offset..crc32_header_offset + keysz - 1]
       value_bytes = data[crc32_header_offset + keysz..]
 
-      [epoc, unpack(key_bytes, key_type), unpack(value_bytes, value_type)]
+      [epoch, unpack(key_bytes, key_type), unpack(value_bytes, value_type)]
     end
 
-    def serialize_header(epoc:, key_type:, keysz:, value_type:, valuesz:)
-      [epoc, keysz, valuesz, DATA_TYPE[key_type], DATA_TYPE[value_type]].pack(HEADER_FORMAT)
+    def serialize_header(epoch:, key_type:, keysz:, value_type:, valuesz:)
+      [epoch, keysz, valuesz, DATA_TYPE[key_type], DATA_TYPE[value_type]].pack(HEADER_FORMAT)
     end
 
     def deserialize_header(header_data)
@@ -284,7 +284,7 @@ flowchart LR;
 
 {{<mermaid>}}
 flowchart LR;
-    A([put]) --> B(generate epoc)
+    A([put]) --> B(generate epoch)
     B --> C(serialize data)
     C --> G(add to key_dir)
     G --> D(write to file)
@@ -309,13 +309,13 @@ module Bitcask
       return '' if key_struct.nil?
 
       @db_fh.seek(key_struct[:write_pos])
-      epoc, key, value = deserialize(@db_fh.read(key_struct[:log_size]))
+      epoch, key, value = deserialize(@db_fh.read(key_struct[:log_size]))
 
       value
     end
 
     def put(key, value)
-      log_size, data = serialize(epoc: Time.now.to_i, key: key, value: value)
+      log_size, data = serialize(epoch: Time.now.to_i, key: key, value: value)
 
       @key_dir[key] = key_struct(@write_pos, log_size, key)
       persist(data)
