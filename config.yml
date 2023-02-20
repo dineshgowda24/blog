@@ -293,7 +293,7 @@ params:
   displayPostDescription: true
   enablePostMeta: true
   enablePostMetaInHome: true
-  postMetaDateFormat: 2006.1.2
+  postMetaDateFormat: 2 January 2006
   displayPublishedDate: true
   publishedDateIcon: calendar-alt
   displayModifiedDate: false
@@ -331,21 +331,21 @@ params:
   footnoteReturnLinkIcon: angle-up
   insertHrBySelf: true
   customizeScrollbar: true
-  fontFamilySiteBrand: 'Spectral'
-  fontFamilyMenu: 'Spectral'
-  fontFamilyTitle: 'Spectral'
-  fontFamilyHeadings: 'Spectral'
-  fontFamilyQuote: 'Spectral'
-  fontFamilyTOC: 'Spectral'
-  fontFamilyCaption: 'Spectral'
-  fontFamilyFooter: 'Spectral'
-  fontFamilyBody: 'Spectral'
+  fontFamilySiteBrand: 'EB Garamond'
+  fontFamilyMenu: 'EB Garamond'
+  fontFamilyTitle: 'EB Garamond'
+  fontFamilyHeadings: 'EB Garamond'
+  fontFamilyQuote: 'EB Garamond'
+  fontFamilyTOC: 'EB Garamond'
+  fontFamilyCaption: 'EB Garamond'
+  fontFamilyFooter: 'EB Garamond'
+  fontFamilyBody: 'EB Garamond'
   fontFamilyCode: 'Fira Code'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap
-  fontSize: 17
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap&family=EB+Garamond:ital@0;1&display=swap
+  fontSize: 20
   tabSize: 4
-  lineHeight: 1.618
+  lineHeight: 1.418
   enableParagraphIndent: true
   indentFirstParagraph: false
   paragraphStyle: margin
