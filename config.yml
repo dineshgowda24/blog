@@ -288,7 +288,7 @@ params:
   duration: 0.5
   primaryColorLight: '220, 90%, 56%'
   primaryColorDark: '201, 65%, 62%'
-  postWidth: 50
+  postWidth: 45
   original: true
   displayPostDescription: true
   enablePostMeta: true
@@ -331,19 +331,19 @@ params:
   footnoteReturnLinkIcon: angle-up
   insertHrBySelf: true
   customizeScrollbar: true
-  fontFamilySiteBrand: 'EB Garamond'
-  fontFamilyMenu: 'EB Garamond'
-  fontFamilyTitle: 'EB Garamond'
-  fontFamilyHeadings: 'EB Garamond'
-  fontFamilyQuote: 'EB Garamond'
-  fontFamilyTOC: 'EB Garamond'
-  fontFamilyCaption: 'EB Garamond'
-  fontFamilyFooter: 'EB Garamond'
-  fontFamilyBody: 'EB Garamond'
+  fontFamilySiteBrand: 'Cardo'
+  fontFamilyMenu: 'Cardo'
+  fontFamilyTitle: 'Cardo'
+  fontFamilyHeadings: 'Cardo'
+  fontFamilyQuote: 'Cardo'
+  fontFamilyTOC: 'Cardo'
+  fontFamilyCaption: 'Cardo'
+  fontFamilyFooter: 'Cardo'
+  fontFamilyBody: 'Cardo'
   fontFamilyCode: 'Fira Code'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap&family=Spectral:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700;1,800&display=swap&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap&family=EB+Garamond:ital@0;1&display=swap
-  fontSize: 20
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap&family=Spectral:ital,wght@0,500;1,500&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;1,500&display=swap&family=Cardo:ital,wght@0,400;1,400&display=swap&family=EB+Garamond:ital@0;1&display=swap
+  fontSize: 17
   tabSize: 4
   lineHeight: 1.418
   enableParagraphIndent: true
