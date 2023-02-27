@@ -41,7 +41,7 @@ Lead backend engineer @Colearn, Abu Dabhi.
 
 ### Projects
 
-- [ecsnv](https://github.com/dineshgowda24/ecsnv) :  A lightweight utility to dump AWS Farget's ECS containers environment variables locally.
+- [ecsnv](https://github.com/dineshgowda24/ecsnv) :  A lightweight utility to dump AWS Fargate's ECS containers environment variables locally.
 - [tic-tac-to](https://github.com/dineshgowda24/tic-tac-toe) : Tic Tac Toe over network.
 - [bitcask-rb](https://github.com/dineshgowda24/bitcask-rb) : Build your own key value store.
 - [redislock](https://github.com/dineshgowda24/redislock) : Light weight redis lock.
