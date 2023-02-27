@@ -13,3 +13,28 @@ h1, h2, h3, h4, h5, h6 {
     src: local('GoMono Regular'), local('GoMono-Regular'),
          url('/fonts/Go-Mono-for-Powerline.woff') format('woff'),
 }
+
+// post meta and updated badge should be same as the entire website text
+@if variable-exists("fontFamilyBody") {
+    .post-meta, .updated-badge {
+        font-family: $fontFamilyBody;
+    }
+}
+
+
+.updated-badge-container, .related-posts, .post-tags, .contents {
+    margin-top: 3rem;
+}
+
+.post-share {
+    margin-top: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.post img {
+    margin: 1em auto;
+}
