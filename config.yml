@@ -208,7 +208,7 @@ params:
   displayTaxonomyTermCount: true
   limitEntriesLimit: -1
   includeContent: true
-  enableDarkMode: true
+  enableDarkMode: false
   defaultTheme: light
   hideThemeToggle: false
   hideThemeToggleInHome: false
