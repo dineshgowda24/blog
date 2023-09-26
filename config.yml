@@ -50,10 +50,11 @@ markup:
       xHTML: false
   highlight:
     codeFences: true
-    guessSyntax: false
+    guessSyntax: true
     lineNos: true
     lineNumbersInTable: true
-    noClasses: false
+    # noClasses: false
+    style: nord
   tableOfContents:
     startLevel: 2
     endLevel: 4
@@ -67,7 +68,7 @@ author:
   email: http://scr.im
   motto:
   avatar: /icons/apple-touch-icon.png
-  website: 'https://dinesh.wiki/'
+  website: 'https://dineshgowda.com/'
   twitter: dineshgowda24
   linkedin: dineshgowdac
 related:
@@ -332,7 +333,7 @@ params:
   insertHrBySelf: true
   customizeScrollbar: true
   fontFamilySiteBrand: 'Kreon'
-  fontFamilyMenu: 'Kreon'
+  fontFamilyMenu: 'PT Sans'
   fontFamilyTitle: 'Kreon'
   fontFamilyHeadings: 'Kreon'
   fontFamilyQuote: 'Kreon'
@@ -340,9 +341,9 @@ params:
   fontFamilyCaption: 'Kreon'
   fontFamilyFooter: 'Kreon'
   fontFamilyBody: 'PT Sans'
-  fontFamilyCode: 'Menlo, Consolas, Monaco, monospace;'
+  fontFamilyCode: 'Fira Code, Consolas, Monaco, monospace;'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap&family=Kreon:wght@300;600&display=swap&family=PT+Sans:ital@0;1&display=swap
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap&family=Kreon:wght@300;600&display=swap&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap
   fontSize: 16
   tabSize: 4
   lineHeight: 1.418
