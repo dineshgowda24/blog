@@ -7,7 +7,6 @@ categories: [databases]
 katex: true
 tags: [key-value, performance, bitcask, diy, educational]
 mermaid: true
-
 ---
 
 Databases have always fascinated me, and I have always dreamt of building a simple, hobby database for fun.
@@ -28,7 +27,7 @@ I have read several blog posts about building redis, git, compiler, and interpre
 
 ### Data Format
 
-Let's start breaking it down. 
+Let's start breaking it down.
 
 #### What's the essential thing that we need to store?
 
@@ -67,7 +66,7 @@ The final data format would look like something below. We would store 20 bytes o
 - The following 4 bytes are a 32-bit integer representing epoch timestamp.
 - The following 8 bytes are two 32-bit integers representing `keysize` and `valuesize`.
 - The next 4 bytes are two 16-bit integers representing `keytype` and `valuetype`.
-- The remaining bytes are our key and value. 
+- The remaining bytes are our key and value.
 
 <img src="images/bitcask-db.svg" width= "80%" style="border:none;" alt="Data Format"/>
 
@@ -87,7 +86,7 @@ File.open('sample.txt', 'w') do |file|
 end
 ```
 
-It's **36** bytes because, by default, they are written as strings where each character is 1 byte. 
+It's **36** bytes because, by default, they are written as strings where each character is 1 byte.
 
 $${\textsf{ 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 bytes}}$$
 
@@ -103,7 +102,7 @@ The largest `key` or `value` stored in file is a function of the type of integer
 
 $${\large{\mathsf{\max_{\substack{\mathsf{1<x<2^{x}-1}}} f(x)}}}  \textsf{where x is the size of an integer in bits}$$
 
-As our `keysize` or `valuesize` are 4 bytes(32 bits) unsigned integers. The largest value of key or value that we can store is 
+As our `keysize` or `valuesize` are 4 bytes(32 bits) unsigned integers. The largest value of key or value that we can store is
 
 $${{\mathsf{ 2^{32-1}} = \textsf{4294967295 bytes =  4.29 GB}}}$$
 
@@ -193,7 +192,7 @@ module Bitcask
     end
 
   end
-end 
+end
 ```
 
 Below are a few helper functions used for packing, unpacking and generating crc.

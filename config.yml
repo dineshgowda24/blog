@@ -1,4 +1,4 @@
-baseURL: 'https://dinesh.wiki'
+baseURL: 'https://dineshgowda.com'
 title: Dinesh Gowda
 languageCode: en
 hasCJKLanguage: false
@@ -125,16 +125,16 @@ menu:
       weight: 2
       pre: internal
       post: archive
-    - pageref: /categories/
-      name: Categories
-      weight: 3
-      pre: internal
-      post: th
-    - pageref: /tags/
-      name: Tags
-      weight: 4
-      pre: internal
-      post: tags
+    # - pageref: /categories/
+    #   name: Categories
+    #   weight: 3
+    #   pre: internal
+    #   post: th
+    # - pageref: /tags/
+    #   name: Tags
+    #   weight: 4
+    #   pre: internal
+    #   post: tags
     - url: https://drive.google.com/file/d/1utDM-C9yNm2DvBuPXECOzrJfCYhe_Zku/view
       name: Resume
       weight: 5
@@ -288,7 +288,7 @@ params:
   duration: 0.5
   primaryColorLight: '220, 90%, 56%'
   primaryColorDark: '201, 65%, 62%'
-  postWidth: 45
+  postWidth: 60
   original: true
   displayPostDescription: true
   enablePostMeta: true
@@ -331,19 +331,19 @@ params:
   footnoteReturnLinkIcon: angle-up
   insertHrBySelf: true
   customizeScrollbar: true
-  fontFamilySiteBrand: 'Cardo'
-  fontFamilyMenu: 'Cardo'
-  fontFamilyTitle: 'Cardo'
-  fontFamilyHeadings: 'Cardo'
-  fontFamilyQuote: 'Cardo'
-  fontFamilyTOC: 'Cardo'
-  fontFamilyCaption: 'Cardo'
-  fontFamilyFooter: 'Cardo'
-  fontFamilyBody: 'Cardo'
-  fontFamilyCode: 'Fira Code'
+  fontFamilySiteBrand: 'Kreon'
+  fontFamilyMenu: 'Kreon'
+  fontFamilyTitle: 'Kreon'
+  fontFamilyHeadings: 'Kreon'
+  fontFamilyQuote: 'Kreon'
+  fontFamilyTOC: 'Kreon'
+  fontFamilyCaption: 'Kreon'
+  fontFamilyFooter: 'Kreon'
+  fontFamilyBody: 'PT Sans'
+  fontFamilyCode: 'Menlo, Consolas, Monaco, monospace;'
   fontsLink: >-
-    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap&family=Spectral:ital,wght@0,500;1,500&display=swap&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap&family=EB+Garamond:ital,wght@0,500;1,500&display=swap&family=Cardo:ital,wght@0,400;1,400&display=swap&family=EB+Garamond:ital@0;1&display=swap
-  fontSize: 17
+    https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap&family=Kreon:wght@300;600&display=swap&family=PT+Sans:ital@0;1&display=swap
+  fontSize: 16
   tabSize: 4
   lineHeight: 1.418
   enableParagraphIndent: true
