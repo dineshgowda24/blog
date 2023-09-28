@@ -54,7 +54,7 @@ markup:
     lineNos: true
     lineNumbersInTable: true
     # noClasses: false
-    style: nord
+    style: autumn
   tableOfContents:
     startLevel: 2
     endLevel: 4
