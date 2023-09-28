@@ -430,7 +430,7 @@ params:
   enableOverflowY: true
   maxHeight: 50
   enableCopy: true
-  enableCopyAutoHide: true
+  enableCopyAutoHide: false
   enableFingerprint: true
   enableSRI: false
   enableForceHTTPS: false
