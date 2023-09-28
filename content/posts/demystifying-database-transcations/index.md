@@ -2,6 +2,8 @@
 title: "Demystifying Database Transcations"
 date: 2023-07-22T20:55:32+05:30
 draft: false
+categories: [databases]
+tags: [transcations, postgres, concurrency]
 ---
 
 The most compelling feature of relational database systems is ACID(Atomicity Consistency Isolation Durability). Isolation is achieved using transactions. Isolation is needed to avoid race conditions when concurrent actors act upon the same row.
