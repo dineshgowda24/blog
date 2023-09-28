@@ -1,6 +1,6 @@
 ---
 title: "About"
-date: 2022-01-29T20:04:20+05:30
+# date: 2022-01-29T20:04:20+05:30
 draft: false
 type: about
 share: false
@@ -8,6 +8,7 @@ displayCopyright: false
 displayPublishedDate: false
 displayWordCount: false
 toc: false
+displayModifiedDate: false
 description: "Articles, Experiences and Rants"
 ---
 
