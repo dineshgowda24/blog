@@ -14,40 +14,34 @@ description: "Articles, Experiences and Rants"
 
 <img src="featured.JPG" style="margin: 15px 0px 0px 15px; float: right; border-radius: 50%;" width="300" height="300" alt="dp"/>
 
-Hey there!
-I am Dinesh.
-Polyglot programmer @Colearn.
-I am a Lead backend engineer focusing on web application development in the Go, Python and Ruby ecosystems.
-I am curious about databases, and I am currently reading <https://sql-performance-explained.com/>
+Greetings! I'm Dinesh, a versatile polyglot programmer proudly serving as a Lead Backend Engineer at Colearn, nestled in the vibrant city of *Abu Dhabi*.
 
-### Now
+My passion for building, refining, and optimizing systems lies at the heart of my work. Whether it's creating robust systems from scratch, breathing new life into existing ones, or elegantly refactoring legacy code. My expertise extends to the intricate art of data migrations, and I'm no stranger to architecting solutions for various paradigms, be it event-driven, RPCs, or crafting backends for mobile and web applications.
 
-Lead backend engineer @Colearn, Abu Dabhi.
+In my tech toolkit, you'll find an array of languages and frameworks, including *Go*, *Python*, and *Ruby*, with recent forays into Django and Rails. I specialize in web application development, API design, and am well-versed in technologies like *gRPC*, *Twirp*, and *Protocol Buffers*. Regarding data storage, I'm your go-to guy for *Postgres*, *Redis*. And let's not forget about message queuing systems – I'm have worked on both *RabbitMQ* and *Kafka*.
 
-### What can I do for you?
+In the expansive realm of cloud computing, I serve as a maestro proficiently orchestrating the power of both AWS and GCP.
 
-- Build systems from scratch.
-- Improve existing systems.
-- Refactor and rewrite legacy systems.
-- Data migrations.
-- Architectures like event-driven, RPCs, mobile and web backend.
+My toolkit includes:
 
-### Tech stacks that I am good at
+- [`Alfred`](https://www.alfredapp.com/): Streamlining productivity and automating tasks with workflows.
+- [`VSCode`](https://code.visualstudio.com/): Crafting code with precision and efficiency.
+- [`Rectangle`](https://rectangleapp.com/): Simplifying window management on my desktop.
+- [`Macbook Pro M1 Pro`](https://www.apple.com/ae/shop/buy-mac/macbook-pro): Unleashing computational prowess.
+- [`Keychron K2`](https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard): Typing comfort and efficiency with a mechanical keyboard.
+- [`MX 3`](https://www.logitech.com/en-us/products/mice/mx-master-3s.html): Navigating digital landscapes with precision.
+- [`Fujifilm x-T3 ii`](https://fujifilm-x.com/global/products/cameras/x-t3/): Capturing life's moments in stunning detail for personal photography.
 
-- Go, Python and Ruby. Django and Rails recently.
-- Web Application Development, APIs, gRPC, Twirp, Protocol buffers.
-- Postgres, Redis and MongoDB.
-- RabbitMQ, Kafka.
-- GCP with Kubernetes, PubSub, CloudFunction. AWS with ECS, Glue, Lambdas.
+Among my accomplishments, you'll find projects like:
 
-### Projects
+- [`ecsnv`](https://github.com/dineshgowda24/ecsnv): A handy utility for locally managing AWS Fargate's ECS container environment variables.
+- [`tic-tac-toe`](https://github.com/dineshgowda24/tic-tac-toe): A network-playable twist on the classic game of Tic Tac Toe.
+- [`bitcask-rb`](https://github.com/dineshgowda24/bitcask-rb): A project for those interested in building their key-value store.
+- [`redislock`](https://github.com/dineshgowda24/redislock): A lightweight solution for implementing Redis-based locks.
+- [`kafka-manager`](https://github.com/dineshgowda24/kafka_manager): Demonstrates expertise in event-driven systems using Kafka.
 
-- [ecsnv](https://github.com/dineshgowda24/ecsnv) :  A lightweight utility to dump AWS Fargate's ECS containers environment variables locally.
-- [tic-tac-to](https://github.com/dineshgowda24/tic-tac-toe) : Tic Tac Toe over network.
-- [bitcask-rb](https://github.com/dineshgowda24/bitcask-rb) : Build your own key value store.
-- [redislock](https://github.com/dineshgowda24/redislock) : Light weight redis lock.
-- [kafka-manager](https://github.com/dineshgowda24/kafka_manager) : Eventing over Kafka.
+When I'm not busy crafting, I'm contributing to the open-source community. You might have encountered my work on the [`Alfred AWS Console Services Workflow`](https://github.com/rkoval/alfred-aws-console-services-workflow) in Golang, simplifying AWS service access using alfred.
 
-### Open Source Contributions
+And here's a bit of personal flair – I'm a seasoned trekker! My latest adventure took me to the breathtaking [Kedarkantha trek](https://en.wikipedia.org/wiki/Kedarkantha).
 
-- [Alfred AWS Console Services Workflow - Golang](https://github.com/rkoval/alfred-aws-console-services-workflow)
+*So, if you're seeking a seasoned engineer with a knack for turning challenges into opportunities and an adventurous spirit, look no further. I'm here to help you achieve your technical dreams. Let's build something remarkable together!*
