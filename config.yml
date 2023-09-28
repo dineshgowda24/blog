@@ -3,7 +3,7 @@ title: Dinesh Gowda
 languageCode: en
 hasCJKLanguage: false
 copyright: ''
-theme: meme
+theme: ["hugo-notice", "meme"]
 newContentEditor: ''
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
