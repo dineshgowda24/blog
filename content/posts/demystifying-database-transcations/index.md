@@ -1,5 +1,5 @@
 ---
-title: "Demystifying Database Transcations"
+title: "Demystifying Database Transactions"
 date: 2023-07-22T20:55:32+05:30
 draft: false
 categories: [databases]
