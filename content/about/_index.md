@@ -12,7 +12,7 @@ displayModifiedDate: false
 description: "Articles, Experiences and Rants"
 ---
 
-<img src="featured.JPG" style="margin: 15px 0px 0px 15px; float: right; border-radius: 50%;" width="300" height="300" alt="dp"/>
+<img src="dp.JPG" style="margin: 15px 0px 0px 15px; float: right; border-radius: 50%;" width="30%" height="30%" alt="dp"/>
 
 Greetings! I'm **Dinesh**
 <br>
@@ -46,7 +46,7 @@ When I'm not busy crafting, I'm contributing to the open-source community. I lik
 I'm a seasoned trekker! My latest adventure took me to the breathtaking [Kedarkantha trek](https://en.wikipedia.org/wiki/Kedarkantha).
 In addition to my love for trekking, I also work out regularly, and recently started delving into photography to capture the stunning landscapes and moments from my journeys on my [Instagram](https://www.instagram.com/_weekend.traveller/) using my *Fujifilm X-T30 ii*.
 
-<img src="DSCF1161.JPG" width="60%" height="60%" alt="dp"/>
+<img src="cover.JPG" width="60%" height="60%" alt="dp"/>
 
 #### Get in touch
 
