@@ -136,7 +136,7 @@ menu:
     #   weight: 4
     #   pre: internal
     #   post: tags
-    - url: https://drive.google.com/file/d/12gNwuI7CqIKp5oZCFrH3ocO5POI270ln/view
+    - url: https://drive.google.com/file/d/1MClifhretqByViHpKtOaqeAu1qUpl1Xo/view
       name: Resume
       weight: 5
       pre: external
