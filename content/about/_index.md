@@ -35,11 +35,12 @@ My software toolkit includes:
 
 When I'm not busy crafting, I'm contributing to the open-source community. I like reading through the source code of various projects and contributing to them. You might have encountered my work on the [Alfred AWS Console Services Workflow](https://github.com/rkoval/alfred-aws-console-services-workflow) in Golang, simplifying AWS service access using alfred. I have also authored a few projects of my own, including:
 
-- [ecsnv](https://github.com/dineshgowda24/ecsnv): A handy utility for locally managing AWS Fargate's ECS container environment variables.
-- [tic-tac-toe](https://github.com/dineshgowda24/tic-tac-toe): A network-playable twist on the classic game of Tic Tac Toe.
-- [bitcask-rb](https://github.com/dineshgowda24/bitcask-rb): A project for those interested in building their key-value store.
-- [redislock](https://github.com/dineshgowda24/redislock): A lightweight solution for implementing Redis-based locks.
-- [kafka-manager](https://github.com/dineshgowda24/kafka_manager): Eventing made easy with Kafka.
+- [browser](https://github.com/dineshgowda24/browser): **Golang** package designed to parse user agent strings. It provides a user-friendly and efficient solution for extracting essential information about a user's browser, device, and operating system from their HTTP user agent headers.
+- [ecsnv](https://github.com/dineshgowda24/ecsnv): A handy utility written in **Golang** for locally managing AWS Fargate's ECS container environment variables.
+- [tic-tac-toe](https://github.com/dineshgowda24/tic-tac-toe): A network-playable twist on the classic game of Tic Tac Toe written in **Golang**.
+- [bitcask-rb](https://github.com/dineshgowda24/bitcask-rb): A project for those interested in building their key-value store in **Ruby**.
+- [redislock](https://github.com/dineshgowda24/redislock): A lightweight solution for implementing Redis-based locks in **Golang**.
+- [kafka-manager](https://github.com/dineshgowda24/kafka_manager): Eventing made easy with Kafka written in **Golang**.
 
 #### Personal flair
 
