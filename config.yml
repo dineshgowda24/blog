@@ -254,8 +254,8 @@ params:
   valineEmojiMaps: {}
   valineEnableQQ: false
   valineRequiredFields: []
-  enableUtterances: false
-  utterancesRepo: ''
+  enableUtterances: true
+  utterancesRepo: 'dineshgowda24/blog'
   utterancesIssueTerm: pathname
   utterancesTheme: github-light
   utterancesThemeDark: photon-dark
