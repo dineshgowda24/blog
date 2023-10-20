@@ -51,4 +51,4 @@ In addition to my love for trekking, I also work out regularly, and recently sta
 
 #### Get in touch
 
-*So, if you're seeking a seasoned engineer with a knack for turning challenges into opportunities and an adventurous spirit, look no further. I'm here to help you achieve your technical dreams. Let's build something remarkable together! You can reach me on my email or twitter.*
+*If you're seeking a seasoned engineer with a knack for turning challenges into opportunities and an adventurous spirit you can reach me on my email or twitter.*
