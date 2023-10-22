@@ -268,3 +268,12 @@ Serializable isolation level guarantees that all transactions are executed seria
 Standard states that this isolation level has no anomalies. But no one knows how many anomalies actually exist in the wild. Postgres guarantees that all anomalies are not possible at this isolation level.
 
 However, due to performance cost, a large portion of retry overhead makes it less attractive.
+
+## Follow up
+
+If you have any questions, feel free to reach out to me on [X](https://twitter.com/_dineshgowda) or comment below.
+
+**Update**: *The post was featured on few newletters.*
+
+{{< tweet user="ModernSQL" id="1708732428305498182" >}}
+{{< tweet user="eatonphil" id="1707485078870163614" >}}
