@@ -6,13 +6,13 @@ categories: [databases]
 tags: [postgres, performance]
 ---
 
-Before we jump into what `VACUUM` does and its gotachs. We need to understand how the data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does and its implications.
+Before we jump into what `VACUUM` does and its gotachs. We need to understand how the data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does, why it's needed and its implications.
 
 ## Tuples, Page & TOAST
 
-A **tuple** in database terms, both a table's row version and index entries. A tuple is a single row of a table. It contains the actual data. A tuple is made up of the following things.
+A **tuple** in database terms is both a table's row version and index entries. A tuple is a single row of a table. It contains the actual data. A tuple is made up of the following things.
 
-- **header**: it's a 23-byte header that contains the tuple metadata
+- **header**: it's a 23-byte header that contains the tuple metadata.
 - **data**: the actual data of the tuple.
 
 A **page** in the database is a single unit of storage of a fixed size, usually between 4KiB to 16KiB. In Postgres, it's 8KiB. A single page can hold multiple rows, indexes, etc. When the data is written or read from disk, it's done in terms of whole pages. 
@@ -26,8 +26,8 @@ select current_setting('block_size');
 ```
 A single page is made up of the following things.
 
-- **header**: it's a 28-byte header that contains the page metadata
-- **array of tuple pointers(table of contents)**: the number of tuple pointers is determined by the size of the tuple. Each tuple pointer is 4 bytes. 
+- **header**: it's a 28-byte header that contains the page metadata.
+- **array of tuple pointers(table of contents)**: pointers to the tuples on the page.
 - **free space**: the free space on the page is used to store new tuples. Once the free space is exhausted, a new page will be created. 
 - **tuples**: rows of the table. Each tuple is 23 bytes plus the size of the data. 
 - **special space**: stores things like visibility map, free space map, etc. 
@@ -70,15 +70,15 @@ Every DML statement in Postgres is wrapped around a unique transaction ID perfor
 - **t_xmax** is the transaction that updated or deleted the tuple.
 
 We can use the `heap_page_items` function to view the page items/rows on a page. It takes the raw page data as input and returns the page items. 
-It returns the following columns
-- **lp**: location pointer
-- **lp_len**: length of the tuple
-- **t_xmin**: transaction ID which inserted the tuple
-- **t_xmax**: transaction id which updated or deleted the tuple
-- **t_ctid**: tuple id
-- **t_data**: bytea representation of the tuple 
+We will be only focusing on the following columns.
+- **lp**: location pointer.
+- **lp_len**: length of the tuple.
+- **t_xmin**: transaction id which inserted the tuple.
+- **t_xmax**: transaction id which updated or deleted the tuple.
+- **t_ctid**: tuple id.
+- **t_data**: bytea representation of the tuple .
 
-Looking into the data, we see that the transaction id is 775 and has a page entry. For this tuple, the **t_xmax** is 0, which means that it's a new entry and has not yet been updated or deleted.
+Looking into the data, we see that the transaction id is 775 and has a page entry. The **t_xmax** is 0, which means that it's a new entry and has not yet been updated or deleted by any transaction.
 
 ```sql
 select lp, t_xmin, t_xmax, t_ctid from heap_page_items(get_raw_page('test_table', 0));
@@ -102,7 +102,7 @@ update test_table set name = 'prod' where id = 1;
 commit;
 ```
 
-Now, if we look at the page items, we see that the transaction ids 765 and 766 have a page entry. For this tuple, the **t_xmax** is 765, which means that it's a new entry and has not yet been updated or deleted. We can see that there are multiple entries for the same tuple. The old tuple is still present on the disk and has not been erased.
+Now, if we look at the page items, we see that the transaction ids `765` and `766` have a page entry. For the last tuple the **t_xmax** is set to ``765`` which means that it has been updated and the tuple is not invalid. There is a new tuple with **t_xmin** set to `766` and **t_xmax** set to `0`, which is the new version of the tuple. Notice the **t_ctid** for the old tuple is `(0,2)`and for the new tuple is `(0,2)`. The first number is the block number and the second number is index in the block. Previously, the tuple was at index `1`, now it's at index `2` which means the new tuple is inserted next to the old tuple. We can also infer that the old tuple is not removed from the disk. 
 
 ```sql
 select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_page('test_table', 0));
@@ -115,10 +115,10 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 
 **TOAST (The Oversized-Attribute Storage Technique)**
 
-The obvious question is, can a row not exceed 8KiB? Actually, it can. Postgres has TOAST to store tuples larger than 8KiB. A TOAST table is a regular table. However, rows of these tables are handled in such a way that they are never updated; they can be either added or
-deleted, so no versioning. Whenever the tuple is inserted in a table, it is wider than the `TOAST_TUPLE_THRESHOLD` bytes (typically 2 KiB). The columns larger than 2KiB are stored in a separate table, and a reference to the TOAST table is stored in the main table. This might impact the performance if there are a lot of updates on the columns stored in the TOAST table.
+The obvious question is, can a tuple not exceed 8KiB? Actually, it can. Postgres has TOAST to store tuples larger than 8KiB. A TOAST table is a regular table. Whenever the tuple is inserted in a table, it is wider than the `TOAST_TUPLE_THRESHOLD` bytes (typically 2 KiB). The columns larger than 2KiB are stored in a separate table, and a reference to the TOAST table is stored in the main table. This might impact the performance if there are a lot of updates on the columns stored in the TOAST table.
 
-We list the tuples larger than 8KiB using the below query. 
+We can itentify the tuples larger than 8KiB using the below query.
+
 ```sql
 select 
  r.id as row_id,
@@ -130,12 +130,59 @@ order by sum(pg_column_size(r.*)) desc
 limit 10;
 ```
 
+Let's create a new table and insert a tuple large enough to be stored in the TOAST table.
+
+```sql
+create table if not exists test_table_toast (
+ id serial primary key,
+ large_text text
+);
+insert into test_table_toast (large_text) select repeat('lorem ipsum dolor sit amet, consectetur adipiscing elit. ', 10000);
+
+select r.id as row_id, sum(pg_column_size(r.*)) as row_size from test_table_toast as r group by r.id;
+ row_id | row_size
+--------+----------
+      1 |     6626 -- the row size is ~6.5KiB
+(1 row)
+```
+
+If we check the page items, the **lp_len** is only **46 bytes**. But the actual size of the tuple is **6626 bytes**. This is because the actual data is stored in the TOAST table. The `t_data` column contains the reference to the TOAST table.
+
+```sql
+select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_page('test_table_toast', 0));
+ lp | lp_len | t_xmin | t_xmax | t_ctid |                     t_data
+----+--------+--------+--------+--------+------------------------------------------------
+  1 |     46 |    787 |      0 | (0,1)  | \x01000000011294b20800c21900006440000060400000
+(1 row)
+```
+
+Every table has a corresponding TOAST table. The TOAST table name is `pg_toast.pg_toast_<table_oid>`. The `table_oid` can be found using the below query.
+
+{{< highlight postgresql "linenos=table" >}}
+select oid, relname from pg_class where relname = 'test_table_toast';
+  oid  |     relname
+-------+------------------
+ 16476 | test_table_toast
+(1 row)
+
+\d pg_toast.pg_toast_16476;
+TOAST table "pg_toast.pg_toast_16476"
+   Column   |  Type
+------------+---------
+ chunk_id   | oid
+ chunk_seq  | integer
+ chunk_data | bytea
+Owning table: "public.test_table_toast"
+Indexes:
+    "pg_toast_16476_index" PRIMARY KEY, btree (chunk_id, chunk_seq)
+{{< /highlight >}}
+
 ## [Vacuuming](https://www.postgresql.org/docs/current/sql-vacuum.html)
 
-Previously, we saw that when a tuple is updated or deleted, the old tuple is still present on the disk. Over time, these dead tuples can grow and eat up disk space. Routine vaccuming removes these dead tuples and cleans up disk space. It also keeps the stats table updated. These stats tables are used by the query optimizer to identify the best possible way to execute a query. 
+Previously, we saw that when a tuple is updated or deleted, the old tuple is still present on the disk. Over time, these dead tuples can grow and eat up disk space. Routine vaccuming removes these dead tuples and cleans up disk space.
 
 There are two types of vacuuming in Postgres
-- **VACUUM**: This is the most basic form of vacuuming. It removes dead tuples versions in the table. It does not reclaim the space occupied by the dead tuples.
+- **VACUUM**: This is the most basic form of vacuuming. It removes dead tuples versions in the table. It does not reclaim the space occupied by the dead tuples. There can be scenarios where the space is reclaimed by acquiring an `ACCESS EXCLUSIVE` lock on the table.
 - **VACUUM FULL**: This is a more aggressive form of vacuuming. It removes dead tuples and reclaims the space. Full vacuuming is a blocking operation. It locks the table and prevents any `DML` operations on the table. 
 
 While the vacuuming processing is running any `DDL` operations are blocked.
@@ -205,14 +252,10 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 (3 rows)
 ```
 
-`VAACUMM` removes the dead tuples and updates the stats table. It does not reclaim the space occupied by the dead tuples in all the cases. There are cases where the space is reclaimed by acquiring an `ACCESS EXCLUSIVE` lock on the table.
+We can see in the below output that the plain `VACUUM` operation removes the dead tuples but does not reclaim the space occupied by them. 
 
 ```sql
 vacuum test_table;
-```
-After vacuuming, we see that the dead tuples have been removed, but the disk space has not been reclaimed.
-
-```sql
 select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_page('test_table', 0));
  lp | lp_len | t_xmin | t_xmax | t_ctid |           t_data
 ----+--------+--------+--------+--------+----------------------------
@@ -222,15 +265,10 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 (3 rows)
 ```
 
-`VACUUM FULL` removes the dead tuples, updates the stats table, and reclaims the space occupied by them. 
+We can see in the below output that `VACUUM FULL` removes the dead tuples and reclaims the space occupied by them. The previous dead tuples with **t_xmin** `778` and `779` are removed and the space is reclaimed.
 
 ```sql
 vacuum full test_table;
-```
-
-After full vacuuming, we see that the dead tuples have been removed, and the disk space has also been reclaimed.
-
-```sql
 select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_page('test_table', 0));
  lp | lp_len | t_xmin | t_xmax | t_ctid |           t_data
 ----+--------+--------+--------+--------+----------------------------
@@ -244,7 +282,7 @@ The vacuuming process is divided into multiple phases.
 
 #### Heap Scan
 
-The first phase is the heap scan. In this phase, the visibility map is checked. The idea of visibility map is to mark the pages that do not have any dead tuples. So only the pages that are not on the visibility map will be scanned. The IDs of the dead tuples are added to a special array called `tids`, which is used in the next phase.
+The first phase is the heap scan. In this phase, the visibility map is checked. The idea of visibility map is to keep track of all the pages that does not have any dead tuples. So only the pages that are not on the visibility map will be scanned. The IDs of the dead tuples are added to a special array called `tids`, which is used in the next phase.
 
 #### Index Vacuuming
 
@@ -252,26 +290,33 @@ In this phase, all the indexes on the table being vacuumed are scanned. It ident
 
 #### Heap Vacuuming
 
-In this phase, the dead tuples are removed from the heap. The tid array is used to identify the dead tuples. The dead tuples are removed from the heap. It can safely remove the dead tuples since the index entries have been removed in the previous phase.
+In this phase, the dead tuples are removed from the heap. The `tids` array is used to identify the dead tuples. The dead tuples are removed from the heap. It can safely remove the dead tuples since the index entries have been removed in the previous phase.
 
 #### Heap Truncating
 
-In this phase, if the process identifies that several pages towards the end of the file are empty, the file will be truncated to save disk space. The truncation might require an `ExclusiveLock` on the table, which can be a blocking operation.
+In this phase, if the process identifies that several pages towards the end of the file are empty, the file will be truncated to save disk space. The truncation might require an `ACCESS EXCLUSIVE` on the table, which can be a blocking operation.
 
 ### Access Exclusive Lock during plain VACUUM
 
-The `VACUUM` operation does not require an `ACCESS EXCLUSIVE` lock in all the cases. But there are cases where the plain `VACUUM` requires an `ACCESS EXCLUSIVE` lock, mentioned in the Heap Truncating phase. If an `ACCESS EXCLUSIVE` has been acquired, then the table is locked during the `VACUUM` operation. The master can detect if any DML operations are being performed on the table and can release the lock if it has been aquired. But once these locks are propagated to the replicas. On replicas, there is no way to detect if a query is being blocked by a `VACUUM` operation, so the read queries can be blocked indefinitely on the replicas and can cause an incident in a high-traffic environment.
+**Why does the `ACCESS EXCLUSIVE` lock get acquired during the `VACUUM` operation?**
+
+This was TIL moment for me as I always thought plain vacuuming does not require an exclusive lock. 
+
+In simple terms, performing a plain vacuum operation on a database table does not always require an exclusive lock, except during the [Heap Truncating phase](#heap-truncating). If the vacuum process identifies that several pages towards the end of the file are empty, it will truncate the file to save disk space this requires an `ACCESS EXCLUSIVE` lock.
+
+When an exclusive lock is acquired, the table remains locked throughout the `VACUUM` process. The primary node can monitor ongoing Data Manipulation Language (DML) operations on the table and release the lock if needed. However, the replicas cannot distinguish whether a query is blocked by a `VACUUM` operation, which can cause problems for read queries on the replicas, especially in high-traffic environments.
+
 
 **How can we avoid this?** 
 
-We can disable the `TRUNCATE` operation in the `VACUUM` operation by setting the `vacuum_truncate` parameter to `off.` This will prevent the truncation of pages, and hence, the `ACCESS EXCLUSIVE` will not be acquired. However, this will not reclaim the space occupied by the dead tuples, which can be a problem in the long run. 
+We can disable the `TRUNCATE` operation in the `VACUUM` operation by setting the `vacuum_truncate` parameter to `off.` This will prevent the truncation of pages, and hence, the lock will not be acquired. However, this will not reclaim the space occupied by the dead tuples, which can be a problem in the long run. 
 
-1. The best way to handle this is to perform the `VACUUM` operation during off-peak hours without disabling the `TRUNCATE` operation. This will ensure that the space occupied by the dead tuples is reclaimed.
+1. The best way to handle this is to perform the vacuuming operation during off-peak hours without disabling the `vacuum_truncate` option. This will ensure that the space occupied by the dead tuples is reclaimed.
 2. If the application can handle the downtime, then the `VACUUM FULL` operation can be performed. This will reclaim the space occupied by the dead tuples.
-3. If the application cannot handle the downtime, then the `VACUUM` operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like [pg_repack](https://reorg.github.io/pg_repack/), which can be used to reclaim the space without acquiring the `ACCESS EXCLUSIVE.`
+3. If the application cannot handle the downtime, then the vacuuming operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like [pg_repack](https://reorg.github.io/pg_repack/), which can be used to reclaim the space without acquiring the `ACCESS EXCLUSIVE.`
 
 {{< notice tip >}}
-If you have a running job that might update or delete many rows, it is better to disable the `TRUNCATE` operation in the `VACUUM` operation so that the `ACCESS EXCLUSIVE` is not acquired and the DML operations are not blocked.
+If you have a running job that might update or delete large number of rows, it is better to disable the `TRUNCATE` option in the `VACUUM` operation so that the `ACCESS EXCLUSIVE` is not acquired which might impact the production traffic.
 {{< /notice >}}
 
 ## Further Reading
