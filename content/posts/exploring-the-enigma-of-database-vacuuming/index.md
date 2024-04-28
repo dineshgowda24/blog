@@ -34,7 +34,7 @@ A single page is made up of the following things.
 
 So, a typical page layout looks like the one below.
 
-<img src="images/page_layout.svg" width="50%" style="border:none;" alt="page_layout"/>
+<img src="images/page_layout.png" width="60%" style="border:none;" alt="page_layout"/>
 
 In fact, we can view this database using the `pageinspect` extension.  Let us create a table, add some data, and display the transaction ID performing the insert.
 ```sql
@@ -140,7 +140,7 @@ There are two types of vacuuming in Postgres
 
 While the vacuuming processing is running any `DDL` operations are blocked.
 
-*Let us create a table and insert some data.*
+Let us create a table and insert some data.
 
 ```sql
 truncate test_table; -- remove the existing data
@@ -173,7 +173,7 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 (2 rows)
 ```
 
-*Now, let's update and delete the tuple.* 
+Now, let's update and delete the tuple.
 
 ```sql
 begin;
