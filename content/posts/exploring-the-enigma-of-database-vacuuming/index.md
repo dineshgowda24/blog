@@ -34,17 +34,7 @@ So, a typical page layout looks like the one below.
 
 <img src="images/page_layout.svg" width="50%" style="border:none;" alt="page_layout"/>
 
-The page header details can be queried using the below query.
-```sql
-select lower, upper, special, pagesize from page_header(get_raw_page('test_table', 0));
- lower | upper | special | pagesize
--------+-------+---------+----------
-    28 |  8152 |    8192 |     8192
-(1 row)
-```
-
-In fact, we can view this using the `pageinspect` extension. Let us create a table, add some data, and display the transaction ID performing the insert. 
-
+In fact, we can view this database using the `pageinspect` extension.  Let us create a table, add some data, and display the transaction ID performing the insert.
 ```sql
 create extension pageinspect;
 create table if not exists test_table (
@@ -60,6 +50,14 @@ select txid_current(); -- current txn id performing insert
 (1 row)
 insert into test_table (id, name) values (1, 'test');
 commit;
+```
+The page header details can be queried using the below query.
+```sql
+select lower, upper, special, pagesize from page_header(get_raw_page('test_table', 0));
+ lower | upper | special | pagesize
+-------+-------+---------+----------
+    28 |  8152 |    8192 |     8192
+(1 row)
 ```
 
 **A word about transaction IDs**
@@ -135,10 +133,10 @@ limit 10;
 Previously, we saw that when a tuple is updated or deleted, the old tuple is still present on the disk. Over time, these dead tuples can grow and eat up disk space. Routine vaccuming removes these dead tuples and cleans up disk space. It also keeps the stats table updated. These stats tables are used by the query optimizer to identify the best possible way to execute a query. 
 
 There are two types of vacuuming in Postgres
-- **VACUUM**: This is the most basic form of vacuuming. It removes dead tuples and updates the stats table. It does not reclaim the space.
-- **VACUUM FULL**: This is a more aggressive form of vacuuming. It removes dead tuples, updates the stats table, and reclaims the space.
+- **VACUUM**: This is the most basic form of vacuuming. It removes dead tuples versions in the table. It does not reclaim the space occupied by the dead tuples.
+- **VACUUM FULL**: This is a more aggressive form of vacuuming. It removes dead tuples and reclaims the space. Full vacuuming is a blocking operation. It locks the table and prevents any `DML` operations on the table. 
 
-Full vacuuming is a blocking operation. It locks the table and prevents any DML operations on the table. 
+While the vacuuming processing is running any `DDL` operations are blocked.
 
 *Let us create a table and insert some data.*
 
@@ -205,12 +203,12 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 (3 rows)
 ```
 
-`VAACUMM` removes the dead tuples and updates the stats table. It does not reclaim the space occupied by the dead tuples. 
+`VAACUMM` removes the dead tuples and updates the stats table. It does not reclaim the space occupied by the dead tuples in all the cases. There are cases where the space is reclaimed by acquiring an `ACCESS EXCLUSIVE` lock on the table.
 
 ```sql
 vacuum test_table;
 ```
-After vacuuming, we see that the dead tuples have been removed, but the disk space has not been reclaimed. 
+After vacuuming, we see that the dead tuples have been removed, but the disk space has not been reclaimed.
 
 ```sql
 select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_page('test_table', 0));
@@ -244,7 +242,7 @@ The vacuuming process is divided into multiple phases.
 
 #### Heap Scan
 
-The first phase is the heap scan. In this phase, the visibility map is checked. Any page in the visibility map is skipped since it does not contain any dead tuples. The pages that are not on the visibility map have been scanned. The IDs of the dead tuples are added to a special array called `tids`, which is used in the next phase.
+The first phase is the heap scan. In this phase, the visibility map is checked. The idea of visibility map is to mark the pages that do not have any dead tuples. So only the pages that are not on the visibility map will be scanned. The IDs of the dead tuples are added to a special array called `tids`, which is used in the next phase.
 
 #### Index Vacuuming
 
@@ -260,19 +258,19 @@ In this phase, if the process identifies that several pages towards the end of t
 
 ### ExlusiveLock in VACUUM
 
-The `VACUUM` operation does not require an `ExclusiveLock` in all the cases. It requires a `ShareUpdateExclusiveLock.` This means the table can still be read, but no DML operations can be performed. But there are cases where the plain `VACUUM` requires an `ExclusiveLock,` mentioned in the Heap Truncating phase. If an `ExclusiveLock` has been acquired, then the table is locked during the `VACUUM` operation; the master can detect if any DML operations are being performed on the table and can wait for the DML operations to complete. But these locks can be propagated to the replicas. On replicas, there is no way to detect if a query is being blocked by a `VACUUM` operation, so the read queries can be blocked indefinitely on the replicas and can cause an incident in a high-traffic environment.
+The `VACUUM` operation does not require an `ACCESS EXCLUSIVE` lock in all the cases. But there are cases where the plain `VACUUM` requires an `ACCESS EXCLUSIVE` lock, mentioned in the Heap Truncating phase. If an `ACCESS EXCLUSIVE` has been acquired, then the table is locked during the `VACUUM` operation. The master can detect if any DML operations are being performed on the table and can release the lock if it has been aquired. But once these locks are propagated to the replicas. On replicas, there is no way to detect if a query is being blocked by a `VACUUM` operation, so the read queries can be blocked indefinitely on the replicas and can cause an incident in a high-traffic environment.
 
 {{< notice tip >}}
-If you have a running job that might update or delete many rows, it is better to disable the `TRUNCATE` operation in the `VACUUM` operation so that the `ExclusiveLock` is not acquired and the DML operations are not blocked.
+If you have a running job that might update or delete many rows, it is better to disable the `TRUNCATE` operation in the `VACUUM` operation so that the `ACCESS EXCLUSIVE` is not acquired and the DML operations are not blocked.
 {{< /notice >}}
 
 **How can we avoid this?** 
 
-We can disable the `TRUNCATE` operation in the `VACUUM` operation by setting the `vacuum_truncate` parameter to `off.` This will prevent the truncation of pages, and hence, the `ExclusiveLock` will not be acquired. However, this will not reclaim the space occupied by the dead tuples, which can be a problem in the long run. 
+We can disable the `TRUNCATE` operation in the `VACUUM` operation by setting the `vacuum_truncate` parameter to `off.` This will prevent the truncation of pages, and hence, the `ACCESS EXCLUSIVE` will not be acquired. However, this will not reclaim the space occupied by the dead tuples, which can be a problem in the long run. 
 
-1. The best way to handle this is to perform the `VACUUM` operation during off-peak hours.
+1. The best way to handle this is to perform the `VACUUM` operation during off-peak hours without disabling the `TRUNCATE` operation. This will ensure that the space occupied by the dead tuples is reclaimed.
 2. If the application can handle the downtime, then the `VACUUM FULL` operation can be performed. This will reclaim the space occupied by the dead tuples.
-3. If the application cannot handle the downtime, then the `VACUUM` operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like [pg_repack](https://reorg.github.io/pg_repack/), which can be used to reclaim the space without acquiring the `ExclusiveLock.`
+3. If the application cannot handle the downtime, then the `VACUUM` operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like [pg_repack](https://reorg.github.io/pg_repack/), which can be used to reclaim the space without acquiring the `ACCESS EXCLUSIVE.`
 
 ## Further Reading
 
