@@ -27,9 +27,9 @@ select current_setting('block_size');
 A single page is made up of the following things.
 
 - **header**: it's a 28-byte header that contains the page metadata.
-- **array of tuple pointers(table of contents)**: pointers to the tuples on the page.
+- **array of tuple pointers(table of contents)**: pointers to the tuples on the page. Its 4 bytes per tuple pointer.
 - **free space**: the free space on the page is used to store new tuples. Once the free space is exhausted, a new page will be created. 
-- **tuples**: rows of the table. Each tuple is 23 bytes plus the size of the data. 
+- **tuples**: rows of the table. Each tuple is 23 bytes plus the size of the actual data. 
 - **special space**: stores things like visibility map, free space map, etc. 
 
 So, a typical page layout looks like the one below.
