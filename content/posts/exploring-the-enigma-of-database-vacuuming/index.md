@@ -3,7 +3,7 @@ title: "Exploring the Enigma of Database Vacuuming"
 date: 2024-04-26T19:37:25+04:00
 draft: false
 categories: [databases]
-tags: [sql, postgres, performance]
+tags: [postgres, performance]
 ---
 
 Before we jump into what `VACUUM` does and its gotachs. We need to understand how the data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does and its implications.
