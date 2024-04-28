@@ -13,13 +13,13 @@ A **tuple** in database terms, both a table's row version and index entries. A t
 - **header**: it's a 23-byte header that contains the tuple metadata
 - **data**: the actual data of the tuple.
 
-A **page** in the database is a single unit of storage of a fixed size, usually between 4Kb to 16Kb. In Postgres, it's 8Kb. A single page can hold multiple rows, indexes, etc. When the data is written or read from disk, it's done in terms of whole pages. 
+A **page** in the database is a single unit of storage of a fixed size, usually between 4KiB to 16KiB. In Postgres, it's 8KiB. A single page can hold multiple rows, indexes, etc. When the data is written or read from disk, it's done in terms of whole pages. 
 
 ```sql
 select current_setting('block_size');
  current_setting
 -----------------
- 8192             -- the size of a single page in Postgres is 8Kb
+ 8192             -- the size of a single page in Postgres is 8KiB
 (1 row)
 ```
 A single page is made up of the following things.
@@ -115,10 +115,10 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 
 **TOAST (The Oversized-Attribute Storage Technique)**
 
-The obvious question is, can a row not exceed 8kb? Actually, it can. Postgres has TOAST to store tuples larger than 8kb. A TOAST table is a regular table. However, rows of these tables are handled in such a way that they are never updated; they can be either added or
-deleted, so no versioning. Whenever the tuple is inserted in a table, it is wider than the `TOAST_TUPLE_THRESHOLD` bytes (typically 2 kB). The columns larger than 2kb are stored in a separate table, and a reference to the TOAST table is stored in the main table. This might impact the performance if there are a lot of updates on the columns stored in the TOAST table.
+The obvious question is, can a row not exceed 8KiB? Actually, it can. Postgres has TOAST to store tuples larger than 8KiB. A TOAST table is a regular table. However, rows of these tables are handled in such a way that they are never updated; they can be either added or
+deleted, so no versioning. Whenever the tuple is inserted in a table, it is wider than the `TOAST_TUPLE_THRESHOLD` bytes (typically 2 KiB). The columns larger than 2KiB are stored in a separate table, and a reference to the TOAST table is stored in the main table. This might impact the performance if there are a lot of updates on the columns stored in the TOAST table.
 
-We list the tuples larger than 8kb using the below query. 
+We list the tuples larger than 8KiB using the below query. 
 ```sql
 select 
  r.id as row_id,

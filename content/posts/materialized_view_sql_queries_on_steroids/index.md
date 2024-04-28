@@ -12,20 +12,20 @@ Recently, they normalized their data, and every image was mapped to 4 different 
 
 Below is the query that filters the images tagged `ABSTRACT` for a page and limit results to 10.
 
-```postgres
-SELECT DISTINCT ON (images.id) external_uuid
-FROM images
-         JOIN images_chapters qc ON images.id = qc.image_id
-         JOIN chapters c ON c.id = qc.chapter_id
-         JOIN images_sections qs ON images.id = qs.image_id
-         JOIN sections s ON s.id = qs.section_id
-         JOIN images_subjects qs2 ON images.id = qs2.image_id
-         JOIN subjects s2 ON s2.id = qs2.subject_id
-         JOIN images_topics qt ON images.id = qt.image_id
-         JOIN topics t ON t.id = qt.topic_id
-WHERE s.name = 'ABSTRACT'
-ORDER BY images.id
-OFFSET <offset_page> LIMIT 10
+```sql
+select distinct on (images.id) external_uuid
+from images
+         join images_chapters qc on images.id = qc.image_id
+         join chapters c on c.id = qc.chapter_id
+         join images_sections qs on images.id = qs.image_id
+         join sections s on s.id = qs.section_id
+         join images_subjects qs2 on images.id = qs2.image_id
+         join subjects s2 on s2.id = qs2.subject_id
+         join images_topics qt on images.id = qt.image_id
+         join topics t on t.id = qt.topic_id
+where s.name = 'abstract'
+order by images.id
+offset <offset_page> limit 10
 ```
 
 The count on the actual category tables is meagre <5k rows per table. The join tables have mostly 1(images):1(categories) mapping. Meaning every image has at least been tagged into 4 categories. If our filter predicate results in 100k images, we are essentially joining 5 tables ( images + 4 classes) of 100k each.
@@ -34,7 +34,7 @@ The count on the actual category tables is meagre <5k rows per table. The join t
 
 Below is the result of `EXPLAIN ANALYZE` that filters the images tagged `ABSTRACT` for a specific page, sorts by `images.id`, and returns the first 10 results.
 
-```postgres
+```sql
 Limit  (cost=2256.12..2256.17 rows=10 width=45) (actual time=939.317..939.329 rows=10 loops=1)
   ->  Unique  (cost=2255.87..2257.11 rows=248 width=45) (actual time=939.292..939.324 rows=60 loops=1)
         ->  Sort  (cost=2255.87..2256.49 rows=248 width=45) (actual time=939.291..939.308 rows=64 loops=1)
@@ -123,15 +123,15 @@ If we look at our original query, whatever may be the filter predicate, we are j
 
 So the app service should decide which tables to join based on the filter predicate.
 
-```postgres
-EXPLAIN ANALYSE
-SELECT DISTINCT ON (images.id) external_uuid
-FROM images
-         JOIN images_sections qs ON images.id = qs.image_id
-         JOIN sections s ON s.id = qs.section_id
-WHERE s.name = 'ABSTRACT'
-ORDER BY images.id
-OFFSET 50 LIMIT 10
+```sql
+explain analyse
+select distinct on (images.id) external_uuid
+from images
+         join images_sections qs on images.id = qs.image_id
+         join sections s on s.id = qs.section_id
+where s.name = 'abstract'
+order by images.id
+offset 50 limit 10
 ```
 
 ```sql
@@ -181,43 +181,43 @@ Once we create a materialized view, we can use SQL to query snapshots.
 
 #### Creating the materialized view
 
-```postgres
-CREATE MATERIALIZED VIEW homepage_images as
-SELECT images.id,
+```sql
+create materialized view homepage_images as
+select images.id,
        images.external_uuid,
        images.title,
        images.grades,
        images.is_active,
-       c.name  AS chapter_name,
-       c.slug  AS chapter_slug,
-       s.name  AS section_name,
-       s.slug  AS section_slug,
-       s2.name AS subject_name,
-       s2.slug AS subject_slug,
-       t.name  AS topic_name,
-       t.slug  AS topic_slug
-FROM images
-         JOIN images_chapters qc ON images.id = qc.image_id
-         JOIN chapters c ON c.id = qc.chapter_id
-         JOIN images_sections qs ON images.id = qs.image_id
-         JOIN sections s ON s.id = qs.section_id
-         JOIN images_subjects qs2 ON images.id = qs2.image_id
-         JOIN subjects s2 ON s2.id = qs2.subject_id
-         JOIN images_topics qt ON images.id = qt.image_id
-         JOIN topics t ON t.id = qt.topic_id;
+       c.name  as chapter_name,
+       c.slug  as chapter_slug,
+       s.name  as section_name,
+       s.slug  as section_slug,
+       s2.name as subject_name,
+       s2.slug as subject_slug,
+       t.name  as topic_name,
+       t.slug  as topic_slug
+from images
+         join images_chapters qc on images.id = qc.image_id
+         join chapters c on c.id = qc.chapter_id
+         join images_sections qs on images.id = qs.image_id
+         join sections s on s.id = qs.section_id
+         join images_subjects qs2 on images.id = qs2.image_id
+         join subjects s2 on s2.id = qs2.subject_id
+         join images_topics qt on images.id = qt.image_id
+         join topics t on t.id = qt.topic_id;
 ```
 
 Now that we have created our materialized, lets query it.
 
-```postgres
-SELECT DISTINCT ON (id) external_uuid
-FROM homepage_images
-WHERE section_name = 'ABSTRACT'
-ORDER BY id
-OFFSET <offset_page> LIMIT 10
+```sql
+select distinct on (id) external_uuid
+from homepage_images
+where section_name = 'abstract'
+order by id
+offset <offset_page> limit 10
 ```
 
-```postgres
+```sql
 Limit  (cost=46.04..55.16 rows=10 width=45) (actual time=0.921..0.963 rows=10 loops=1)
   ->  Result  (cost=0.42..55665.11 rows=61011 width=45) (actual time=0.774..0.959 rows=60 loops=1)
         ->  Unique  (cost=0.42..55665.11 rows=61011 width=45) (actual time=0.773..0.950 rows=60 loops=1)
@@ -238,14 +238,14 @@ The significant difference between querying on tables and materialized view is t
 
 We can update the materialized view using the below query. Note that the below query locks the materialized view and will be unusable until refreshed.
 
-```postgres
-REFRESH MATERIALIZED VIEW homepage_images
-```
+{{< highlight postgresql "linenos=table" >}}
+refresh materialized view homepage_images;
+{{< / highlight >}}
 
 To refresh the materialized view without locking, you can use `CONCURRENTLY`, but this option requires you to have a unique index on the materialized view.
 
 {{< highlight postgresql "linenos=table" >}}
-REFRESH MATERIALIZED VIEW CONCURRENTLY homepage_images
+refresh materialized view concurrently homepage_images
 {{< / highlight >}}
 
 ### Closing notes
