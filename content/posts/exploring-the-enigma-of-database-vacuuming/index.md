@@ -256,13 +256,9 @@ In this phase, the dead tuples are removed from the heap. The tid array is used 
 
 In this phase, if the process identifies that several pages towards the end of the file are empty, the file will be truncated to save disk space. The truncation might require an `ExclusiveLock` on the table, which can be a blocking operation.
 
-### ACCESS EXCLUSIVE during plain VACUUM
+### Access Exclusive Lock during plain VACUUM
 
 The `VACUUM` operation does not require an `ACCESS EXCLUSIVE` lock in all the cases. But there are cases where the plain `VACUUM` requires an `ACCESS EXCLUSIVE` lock, mentioned in the Heap Truncating phase. If an `ACCESS EXCLUSIVE` has been acquired, then the table is locked during the `VACUUM` operation. The master can detect if any DML operations are being performed on the table and can release the lock if it has been aquired. But once these locks are propagated to the replicas. On replicas, there is no way to detect if a query is being blocked by a `VACUUM` operation, so the read queries can be blocked indefinitely on the replicas and can cause an incident in a high-traffic environment.
-
-{{< notice tip >}}
-If you have a running job that might update or delete many rows, it is better to disable the `TRUNCATE` operation in the `VACUUM` operation so that the `ACCESS EXCLUSIVE` is not acquired and the DML operations are not blocked.
-{{< /notice >}}
 
 **How can we avoid this?** 
 
@@ -271,6 +267,10 @@ We can disable the `TRUNCATE` operation in the `VACUUM` operation by setting the
 1. The best way to handle this is to perform the `VACUUM` operation during off-peak hours without disabling the `TRUNCATE` operation. This will ensure that the space occupied by the dead tuples is reclaimed.
 2. If the application can handle the downtime, then the `VACUUM FULL` operation can be performed. This will reclaim the space occupied by the dead tuples.
 3. If the application cannot handle the downtime, then the `VACUUM` operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like [pg_repack](https://reorg.github.io/pg_repack/), which can be used to reclaim the space without acquiring the `ACCESS EXCLUSIVE.`
+
+{{< notice tip >}}
+If you have a running job that might update or delete many rows, it is better to disable the `TRUNCATE` operation in the `VACUUM` operation so that the `ACCESS EXCLUSIVE` is not acquired and the DML operations are not blocked.
+{{< /notice >}}
 
 ## Further Reading
 
