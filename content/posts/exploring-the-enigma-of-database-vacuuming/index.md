@@ -256,7 +256,7 @@ In this phase, the dead tuples are removed from the heap. The tid array is used 
 
 In this phase, if the process identifies that several pages towards the end of the file are empty, the file will be truncated to save disk space. The truncation might require an `ExclusiveLock` on the table, which can be a blocking operation.
 
-### ExlusiveLock in VACUUM
+### ACCESS EXCLUSIVE during plain VACUUM
 
 The `VACUUM` operation does not require an `ACCESS EXCLUSIVE` lock in all the cases. But there are cases where the plain `VACUUM` requires an `ACCESS EXCLUSIVE` lock, mentioned in the Heap Truncating phase. If an `ACCESS EXCLUSIVE` has been acquired, then the table is locked during the `VACUUM` operation. The master can detect if any DML operations are being performed on the table and can release the lock if it has been aquired. But once these locks are propagated to the replicas. On replicas, there is no way to detect if a query is being blocked by a `VACUUM` operation, so the read queries can be blocked indefinitely on the replicas and can cause an incident in a high-traffic environment.
 
