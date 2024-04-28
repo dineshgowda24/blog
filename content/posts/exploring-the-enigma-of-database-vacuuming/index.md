@@ -116,7 +116,9 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 
 **TOAST (The Oversized-Attribute Storage Technique)**
 
-| *“The best thing since sliced bread”*
+> *“The best thing since sliced bread”*
+>
+> *- Postgres developers*
 
 The obvious question is, can a tuple not exceed 8KiB? Actually, it can. Postgres has TOAST to store tuples larger than 8KiB. A TOAST table is a regular table. Whenever the tuple is inserted in a table, it is wider than the `TOAST_TUPLE_THRESHOLD` bytes (typically 2 KiB). The columns larger than 2KiB are stored in a separate table, and a reference to the TOAST table is stored in the main table. This might impact the performance if there are a lot of updates on the columns stored in the TOAST table.
 
