@@ -115,9 +115,11 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 
 **TOAST (The Oversized-Attribute Storage Technique)**
 
+| *“the best thing since sliced bread”*
+
 The obvious question is, can a tuple not exceed 8KiB? Actually, it can. Postgres has TOAST to store tuples larger than 8KiB. A TOAST table is a regular table. Whenever the tuple is inserted in a table, it is wider than the `TOAST_TUPLE_THRESHOLD` bytes (typically 2 KiB). The columns larger than 2KiB are stored in a separate table, and a reference to the TOAST table is stored in the main table. This might impact the performance if there are a lot of updates on the columns stored in the TOAST table.
 
-We can itentify the tuples larger than 8KiB using the below query.
+We can identify the tuples larger than 8KiB using the below query.
 
 ```sql
 select 
@@ -183,9 +185,9 @@ Previously, we saw that when a tuple is updated or deleted, the old tuple is sti
 
 There are two types of vacuuming in Postgres
 - **VACUUM**: This is the most basic form of vacuuming. It removes dead tuples versions in the table. It does not reclaim the space occupied by the dead tuples. There can be scenarios where the space is reclaimed by acquiring an `ACCESS EXCLUSIVE` lock on the table.
-- **VACUUM FULL**: This is a more aggressive form of vacuuming. It removes dead tuples and reclaims the space. Full vacuuming is a blocking operation. It locks the table and prevents any `DML` operations on the table. 
+- **VACUUM FULL**: This is a more aggressive form of vacuuming. It removes dead tuples and reclaims the space. Full vacuuming is a blocking operation. It locks the table and prevents any Data Manipulation Language (DML) operations on the table.
 
-While the vacuuming processing is running any `DDL` operations are blocked.
+While the vacuuming processing is running any Data Definition Language (DDL) operations are blocked.
 
 Let us create a table and insert some data.
 
@@ -300,7 +302,7 @@ In this phase, if the process identifies that several pages towards the end of t
 
 **Why does the `ACCESS EXCLUSIVE` lock get acquired during the `VACUUM` operation?**
 
-This was TIL moment for me as I always thought plain vacuuming does not require an exclusive lock. 
+This was [TIL](https://knowyourmeme.com/memes/today-i-learned-til) moment for me as I always thought plain vacuuming does not require an exclusive lock. 
 
 In simple terms, performing a plain vacuum operation on a database table does not always require an exclusive lock, except during the [Heap Truncating phase](#heap-truncating). If the vacuum process identifies that several pages towards the end of the file are empty, it will truncate the file to save disk space this requires an `ACCESS EXCLUSIVE` lock.
 
