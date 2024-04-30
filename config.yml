@@ -389,8 +389,8 @@ params:
   shareOnQQ: false
   shareOnQzone: false
   shareViaQRCode: false
-  enableRelatedPosts: true
-  displayRelatedPosts: true
+  enableRelatedPosts: false
+  displayRelatedPosts: false
   relatedPostsNumber: 5
   relatedPostsIcon: plus-circle
   enablePostTags: true
