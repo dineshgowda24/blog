@@ -346,7 +346,7 @@ params:
     https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap&family=Fira+Code:wght@300..700&display=swap
   fontSize: 16
   tabSize: 4
-  lineHeight: 1.418
+  lineHeight: 1.318
   enableParagraphIndent: true
   indentFirstParagraph: false
   paragraphStyle: margin
