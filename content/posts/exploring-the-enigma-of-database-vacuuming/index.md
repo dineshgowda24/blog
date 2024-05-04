@@ -4,9 +4,8 @@ date: 2024-04-26T19:37:25+04:00
 draft: false
 categories: [databases]
 tags: [postgres, performance]
+images: ["/posts/exploring-the-enigma-of-database-vacuuming/images/thumbnail.png"]
 ---
-
-<img src="images/thumbnail.png" width="30%" style="border:none;" alt="thumbnail"/>
 
 Before we discuss what `VACUUM` does and its implications, we need to understand how data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does, why it's needed, and its implications.
 
