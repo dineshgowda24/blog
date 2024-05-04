@@ -6,6 +6,8 @@ categories: [databases]
 tags: [postgres, performance]
 ---
 
+<img src="images/thumbnail.png" width="30%" style="border:none;" alt="thumbnail"/>
+
 Before we discuss what `VACUUM` does and its implications, we need to understand how data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does, why it's needed, and its implications.
 
 We will primarily focus on [**Postgres**](https://www.postgresql.org/), as it's one of the most widely used open-source databases. Different databases might have different implementations.
