@@ -56,7 +56,9 @@ show default_transaction_isolation;
 
 As the name suggests, the read committed isolation level guarantees that any transaction can read only committed data. This is the default isolation level in Postgres.
 
-#### Non-Repeatable Read
+Let's look at the anomalies that can occur at this isolation level.
+
+##### Non-Repeatable Read
 
 A non-repeatable read is a phenomenon in which a transaction reads the same row twice and gets different results. This can happen when a transaction reads a row and another transaction updates it before the first transaction rereads it.
 
@@ -72,7 +74,7 @@ The anomaly can be prevented using higher isolation levels like repeatable read 
 |6|`select balance as b1 from wallet where id = 1`| | returns 1100(value of b1 changed when the row was read twice within the same transcation) | |
 |8|`commit`| | t1 ends| |
 
-#### Read Skew
+##### Read Skew
 
 Read skew is a phenomenon where a transaction reads data that is inconsistent. This can happen when a transaction reads data from two different transactions. The data read from the first transaction is consistent, but the data read from the second transaction is inconsistent.
 
@@ -88,7 +90,7 @@ Read skew is a phenomenon where a transaction reads data that is inconsistent. T
 |8| b1 + b2 | | 1400(inconsistent data due to read skew) | |
 |8|`commit`| | t1 ends| |
 
-#### Lost Updates(W-W Conflict)
+##### Lost Updates(W-W Conflict)
 
 A lost update happens when one transaction overwrites the changes of another transaction. The overwriting transaction may be committed later, but the changes made by the first transaction are lost. The database system does not know that 1000$ is related to wallet.balance, so it cannot circumvent the lost update.
 One of the ways to prevent lost updates is to use atomic operations.
@@ -108,7 +110,9 @@ One of the ways to prevent lost updates is to use atomic operations.
 select balance from wallet where id = 1; -- returns 1500(inconsistent data due to lost update)
 ```
 
-#### Atomic Operations
+Now let's look at how to prevent lost updates.
+
+##### Atomic Operations
 
 Atomic write operations read records and write them back with the new values. The read and write operations are performed in a single step. This prevents lost updates.
 
@@ -127,7 +131,7 @@ Atomic write operations read records and write them back with the new values. Th
 select balance from wallet where id = 1; -- returns 2000
 ```
 
-#### Explicit Locking
+##### Explicit Locking
 
 Explicit locking can prevent lost updates. A transaction can lock a row and prevent other transactions from modifying it. The lock is released when the transaction commits or rolls back. Any transaction that tries to alter a locked row is blocked until the lock is released.
 
@@ -174,11 +178,11 @@ Postgres guarantees that non-repeatable and phantom read anomalies are impossibl
 |8|`select balance from wallet where balance > 250;`| | still returns 1000 and 500, i.e no phantom read| |
 |9|`commit;`| | t1 ends | |
 
-#### Multi Version Concurrency Control(MVCC)
+##### Multi Version Concurrency Control(MVCC)
 
 Postgres uses MVCC(Multi-Version Concurrency Control) to implement repeatable read isolation levels. MVCC creates a new version, i.e., a snapshot of a row when it is updated. The old version is retained and is visible to transactions that started before the update. The new version is visible to transactions that initiate after the update.
 
-#### Detecting Lost Updates
+##### Detecting Lost Updates
 
 We know lost updates can be prevented using atomic operations or explicit locking at the read committed isolation level, making the transaction serializable. But at a repeatable read isolation level, the transaction can run concurrently with other transactions. The database system can detect the lost updates and roll back the transaction with a serialization failure.
 
@@ -188,7 +192,9 @@ ERROR:  could not serialize access due to concurrent update
 
 The application can then retry the update transaction.
 
-#### Write skew
+Let's look at the anomaly that can occur at this isolation level.
+
+##### Write skew
 
 Write skew happens when the data consistency is violated by two transactions operating on two different rows. Suppose it is allowed to have a negative wallet balance, given the cumulative balance of all wallets is positive. If two transactions try to update the balance of two different wallets of the same user, the user's balance can become negative.
 
@@ -221,7 +227,7 @@ The write skew can be prevented by using explicit locking. All the rows of a use
 select * from wallet where name = 'luffy' for update;
 ```
 
-#### Read Only
+##### Read Only
 
 It was assumed that the read-only transactions are always serializable under Snapshot isolation, i.e. SI, provided the concurrent update transactions are serializable. But this is not true. This is because all SI reads return values from a single instant of time(a snapshot) when all committed transactions have completed their writes, and no writes of uncommitted transactions are visible before the read-only transaction starts. This implies that read-only transactions will not read anomalous results as long as the updated transactions they execute do not write such results.
 

@@ -287,27 +287,27 @@ select lp, lp_len, t_xmin, t_xmax, t_ctid, t_data from heap_page_items(get_raw_p
 (1 row)
 ```
 
-### Phases
+#### Phases
 
 The vacuuming process is divided into multiple phases. 
 
-#### Heap Scan
+##### Heap Scan
 
 The first phase is the heap scan. In this phase, the visibility map is checked. The idea of a visibility map is to keep track of all the pages that do not have any dead tuples. So only the pages that are not on the visibility map will be scanned. The IDs of the dead tuples are added to a special array called `tids`, which is used in the next phase.
 
-#### Index Vacuuming
+##### Index Vacuuming
 
 This phase scans all the indexes on the table being vacuumed. It identifies the index entries that point to the IDs in the `tids` array and removes them from pages. This phase does not leave any index references to the actual dead tuples, but the dead tuples are still present in the heap.
 
-#### Heap Vacuuming
+##### Heap Vacuuming
 
 In this phase, the dead tuples are removed from the heap. The `tids` array is used to identify the dead tuples. The dead tuples are removed from the heap. It can safely remove the dead tuples since the index entries have been removed in the previous phase.
 
-#### Heap Truncating
+##### Heap Truncating
 
 In this phase, if the process identifies that several pages towards the end of the file are empty, the file will be truncated to save disk space. The truncation might require an `ACCESS EXCLUSIVE` on the table, which can be a blocking operation.
 
-### Access Exclusive Lock during plain VACUUM
+#### Access Exclusive Lock during plain VACUUM
 
 **Why does the `ACCESS EXCLUSIVE` lock get acquired during the `VACUUM` operation?**
 
