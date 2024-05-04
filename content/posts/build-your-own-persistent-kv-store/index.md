@@ -7,6 +7,7 @@ categories: [databases]
 katex: true
 tags: [key-value, performance, bitcask, diy, educational]
 mermaid: true
+images: ["/posts/build-your-own-persistent-kv-store/images/bitcask-db-kv-size.svg"]
 ---
 
 Databases have always fascinated me, and I have always dreamt of building a simple, hobby database for fun.
