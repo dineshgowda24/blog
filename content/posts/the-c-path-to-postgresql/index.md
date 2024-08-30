@@ -2,6 +2,8 @@
 title: "The C Path to Postgresql"
 date: 2024-08-30T08:31:05+04:00
 draft: false
+categories: [databases]
+tags: [postgres, c]
 images: ["/posts/the-c-path-to-postgresql/images/thumbnail.jpg"]
 ---
 
