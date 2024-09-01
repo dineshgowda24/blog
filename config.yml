@@ -1,5 +1,5 @@
 baseURL: 'https://dineshgowda.com'
-title: Dinesh Gowda
+title: dineshgowda
 languageCode: en
 hasCJKLanguage: false
 copyright: ''
@@ -197,7 +197,7 @@ params:
   enableTagCloud: true
   fontUnit: em
   largestFontSize: 2.5
-  smallestFontSize: 1
+  smallestFontSize: 1.5
   listWidth: 36
   displayListTitle: true
   listDateFormat: January 2
@@ -319,6 +319,7 @@ params:
   headingsOpt: 1-6
   anchorSymbol: '#'
   anchorIcon: link
+  weight: 10
   enableAnchorLink: true
   enableAnchorAutoHide: true
   enableCaption: true
@@ -332,14 +333,14 @@ params:
   footnoteReturnLinkIcon: angle-up
   insertHrBySelf: true
   customizeScrollbar: true
-  fontFamilySiteBrand: 'Lato'
-  fontFamilyMenu: 'Lato'
-  fontFamilyTitle: 'Lato'
-  fontFamilyHeadings: 'Lato'
-  fontFamilyQuote: 'Lato'
+  fontFamilySiteBrand: 'Source Serif 4'
+  fontFamilyMenu: 'Source Serif 4'
+  fontFamilyTitle: 'Source Serif 4'
+  fontFamilyHeadings: 'Source Serif 4'
+  fontFamilyQuote: 'Source Serif 4'
   fontFamilyTOC: 'Cardo'
-  fontFamilyCaption: 'Lato'
-  fontFamilyFooter: 'Lato'
+  fontFamilyCaption: 'Source Serif 4'
+  fontFamilyFooter: 'Source Serif 4'
   fontFamilyBody: 'Cardo'
   fontFamilyCode: 'Monaco, Fira Code, monospace;'
   fontsLink: >-
