@@ -7,12 +7,156 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Container styling for the TOC */
+.toc {
+    padding: 15px;
+    background-color: #f8fafc; /* Light background to separate TOC */
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #d1d5db; /* Subtle border for definition */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    font-size: 0.95em; /* Slightly smaller text for TOC */
+}
+
+/* Link styling for the TOC links */
+.toc a {
+    color: #1d4ed8; /* Blue color for primary TOC links */
+    font-weight: 500; /* Medium weight for better readability */
+    text-decoration: none;
+    padding: 6px 0; /* Adds vertical spacing around each link */
+    display: block; /* Makes links span full width */
+    border-left: 3px solid transparent; /* Border effect on hover */
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effect for main links */
+.toc a:hover {
+    color: #0c4a6e; /* Darker blue on hover */
+    background-color: #e0f2fe; /* Light blue background on hover */
+    border-left-color: #1d4ed8; /* Blue border for a focused look */
+    padding-left: 8px; /* Indent on hover */
+}
+
+/* Styling for sub-links in the TOC */
+.toc ul {
+    padding-left: 20px; /* Indentation for nested links */
+}
+
+.toc ul a {
+    color: #2563eb; /* Lighter blue for nested links */
+    font-weight: 400; /* Regular weight for nested items */
+    padding-left: 10px; /* Additional left padding for hierarchy */
+}
+
+.toc ul a:hover {
+    color: #1e3a8a; /* Darker shade on hover */
+    background-color: #f0f9ff; /* Softer background for nested hover */
+    border-left-color: #2563eb; /* Lighter blue left border for nested links */
+}
+
+
+
+a {
+    text-decoration: none !important;
+    color: #007acc; /* Use a distinct blue color for highlighting */
+    transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+a:hover {
+    color: #005f99; /* Darker shade of blue for hover effect */
+}
+
 @font-face {
     font-family: 'GoMono';
     font-style: normal;
     src: local('GoMono Regular'), local('GoMono-Regular'),
          url('/fonts/Go-Mono-for-Powerline.woff') format('woff'),
 }
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-Roman.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-Italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-MediumItalic.otf') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-DemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-DemiBoldItalic.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-BoldItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-Black.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-BlackItalic.otf') format('opentype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-ExtraBlack.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OptimaLTPro';
+    src: url('/fonts/OptimaLTPro-ExtraBlackIta.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+
 
 // post meta and updated badge should be same as the entire website text
 @if variable-exists("fontFamilyBody") {
