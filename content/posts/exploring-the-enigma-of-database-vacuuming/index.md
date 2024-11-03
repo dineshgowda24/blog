@@ -37,7 +37,7 @@ A single page is made up of the following things.
 
 So, a typical page layout looks like the one below.
 
-<img src="images/page_layout.png" width="60%" style="border:none;" alt="page_layout"/>
+<img src="images/page_layout.svg" width="60%" style="border:none;" alt="page_layout"/>
 
 In fact, we can view this database using the `pageinspect` extension.  Let us create a table, add some data, and display the transaction ID performing the insert.
 ```sql
