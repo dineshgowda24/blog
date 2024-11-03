@@ -73,6 +73,13 @@ a:hover {
 }
 
 @font-face {
+    font-family: 'AndaleMono';
+    font-style: normal;
+    src: local('AndaleMono Regular'),
+         url('/fonts/andalemo.ttf') format('truetype'),
+}
+
+@font-face {
     font-family: 'OptimaLTPro';
     src: url('/fonts/OptimaLTPro-Roman.otf') format('opentype');
     font-weight: 400;
