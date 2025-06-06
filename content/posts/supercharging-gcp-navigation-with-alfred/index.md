@@ -11,7 +11,7 @@ Navigating Google Cloud Platform, or any cloud platform for that matter, can be 
 
 ## TL;DR
 
-If you want to skip the story and go straight to the workflow, you can find it on alfred-gcp-workflow[^1]
+If you want to skip the story and go straight to the workflow, you can find it on **alfred-gcp-workflow**[^1]
 
 
 <img src="images/demo.gif" width="80%"  alt="Demo" />
