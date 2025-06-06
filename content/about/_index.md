@@ -35,9 +35,9 @@ My software toolkit includes:
 
 When I'm not busy crafting, I'm contributing to the open-source community. I like reading through the source code of various projects and contributing to them. You might have encountered my work on the [Alfred AWS Console Services Workflow](https://github.com/rkoval/alfred-aws-console-services-workflow) in Go, simplifying AWS service access using alfred. I have also authored a few projects of my own, including:
 
+- [**alfred-gcp-workflow**](https://github.com/rkoval/alfred-aws-console-services-workflow): An Alfred workflow that lets you instantly open Google Cloud services or search GCP resources—fast, simple, and right from your Alfred. 
 - [**browser**](https://github.com/dineshgowda24/browser): **Go** package designed to parse user agent strings. It provides a user-friendly and efficient solution for extracting essential information about a user's browser, device, and operating system from their HTTP user agent headers.
 - [**ecsnv**](https://github.com/dineshgowda24/ecsnv): A handy utility written in **Go** for locally managing AWS Fargate's ECS container environment variables.
-- [**tic-tac-toe**](https://github.com/dineshgowda24/tic-tac-toe): A network-playable twist on the classic game of Tic Tac Toe written in **Go**.
 - [**bitcask-rb**](https://github.com/dineshgowda24/bitcask-rb): A project for those interested in building their key-value store in **Ruby**.
 - [**redislock**](https://github.com/dineshgowda24/redislock): A lightweight solution for implementing Redis-based locks in **Go**.
 - [**kafka-manager**](https://github.com/dineshgowda24/kafka_manager): Eventing made easy with Kafka written in **Go**.
