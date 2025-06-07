@@ -68,7 +68,7 @@ After sitting on the idea for months, it came together quickly. Some highlights:
 
 ### Incidents Response
 
-It's late at night, and I'm oncall[^5]. An alert indicates that the SQL instance CPU is spiking or a Pub/Sub subscription ACK is lagging. I need to check GCP right away. Instead of opening multiple tabs and clicking through the console, I can type `gcp compute instance` or `gcp pubsub` and jump right in.
+It's late at night, and I'm oncall[^5]. An alert indicates that the SQL instance CPU is spiking or a Pub/Sub subscription ACK is lagging. I need to check GCP right away. Instead of opening multiple tabs and clicking through the console, I can type `gcp sql instances` or `gcp pubsub` and jump right in.
 
 ### Everyday Tasks
 
