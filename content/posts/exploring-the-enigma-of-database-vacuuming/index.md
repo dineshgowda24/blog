@@ -7,9 +7,9 @@ tags: [postgres, performance]
 images: ["/posts/exploring-the-enigma-of-database-vacuuming/images/thumbnail.png"]
 ---
 
-Before we discuss what `VACUUM` does and its implications, we need to understand how data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does, why it's needed, and its implications.
+Before we discuss what `VACUUM`[^1] does and its implications, we need to understand how data is actually stored on disk. What happens when a tuple is inserted, updated, or deleted? Understanding this will help us understand what `VACUUM` does, why it's needed, and its implications.
 
-We will primarily focus on [**Postgres**](https://www.postgresql.org/), as it's one of the most widely used open-source databases. Different databases might have different implementations.
+We will primarily focus on **Postgres**[^2], as it's one of the most widely used open-source databases. Different databases might have different implementations.
 
 ## Tuples, Page & TOAST
 
@@ -189,9 +189,9 @@ Indexes:
     "pg_toast_16476_index" PRIMARY KEY, btree (chunk_id, chunk_seq)
 {{< /highlight >}}
 
-## [Vacuuming](https://www.postgresql.org/docs/current/sql-vacuum.html)
+## Vacuuming[^1]
 
-Previously, we saw that when a tuple is updated or deleted, the old tuple is still present on the disk. Over time, these dead tuples can grow and eat up disk space. Routine vaccuming removes these dead tuples and cleans up disk space.
+Previously, we saw that when a tuple is updated or deleted, the old tuple is still present on the disk. Over time, these dead tuples can grow and eat up disk space. Routine[^5] vaccuming removes these dead tuples and cleans up disk space.
 
 There are two types of vacuuming in Postgres
 - **VACUUM**: This is the most basic form of vacuuming. It removes dead tuple versions in the table. It does not reclaim the space occupied by the dead tuples. There can be scenarios where the space is reclaimed by acquiring an `ACCESS EXCLUSIVE` lock on the table.
@@ -312,7 +312,7 @@ In this phase, if the process identifies that several pages towards the end of t
 
 **Why does the `ACCESS EXCLUSIVE` lock get acquired during the `VACUUM` operation?**
 
-This was a [TIL](https://knowyourmeme.com/memes/today-i-learned-til) moment, as I always thought plain vacuuming did not require an exclusive lock. 
+This was a TIL[^3] moment, as I always thought plain vacuuming did not require an exclusive lock. 
 
 Performing a plain vacuum operation on a database table does not always require an exclusive lock, except during the [Heap Truncating phase](#heap-truncating). If the vacuum process identifies that several pages towards the end of the file are empty, it will truncate the file to save disk space, which requires an `ACCESS EXCLUSIVE` lock.
 
@@ -325,15 +325,15 @@ We can disable the `TRUNCATE` operation in the `VACUUM` operation by setting the
 
 1. The best way to handle this is to vacuum during off-peak hours without disabling the `vacuum_truncate` option. This will ensure that the space occupied by the dead tuples is reclaimed.
 2. If the application can handle the downtime, then the `VACUUM FULL` operation can be performed. This will reclaim the space occupied by the dead tuples.
-3. If the application cannot handle the downtime, then the vacuuming operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like [pg_repack](https://reorg.github.io/pg_repack/), which can be used to reclaim the space without acquiring the `ACCESS EXCLUSIVE.`
+3. If the application cannot handle the downtime, then the vacuuming operation can be performed with `vacuum_truncate` set to `off.` We can explore other options like pg_repack[^4], which can be used to reclaim the space without acquiring the `ACCESS EXCLUSIVE.`
 
 {{< notice tip >}}
 If you have a running job that might update or delete a large number of rows, it is better to disable the `TRUNCATE` option in the `VACUUM` operation so that the `ACCESS EXCLUSIVE` is not acquired, which might impact the production traffic.
 {{< /notice >}}
 
-## Further Reading
 
-- [Postgres Wiki](https://wiki.postgresql.org/wiki/Introduction_to_VACUUM,_ANALYZE,_EXPLAIN,_and_COUNT)
-- [Sql Vacuum](https://www.postgresql.org/docs/current/sql-vacuum.html)
-- [Routine Vacuuming](https://www.postgresql.org/docs/current/routine-vacuuming.html)
-- [Pg_repack](https://reorg.github.io/pg_repack/)
+[^1]: https://www.postgresql.org/docs/current/sql-vacuum.html
+[^2]: https://www.postgresql.org
+[^3]: https://knowyourmeme.com/memes/today-i-learned-til
+[^4]: https://reorg.github.io/pg_repack/
+[^5]: https://www.postgresql.org/docs/current/routine-vacuuming.html
