@@ -150,7 +150,7 @@ Explicit locking can prevent lost updates. A transaction can lock a row and prev
 select balance from wallet where id = 1; -- returns 2000
 ```
 
-The wait time to acquire the lock can be configured using [`lock_timeout`](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-LOCK-TIMEOUT). The default value is `0`, which disables timeout and the transaction waits indefinitely.
+The wait time to acquire the lock can be configured using `lock_timeout`[^1]. The default value is `0`, which disables timeout and the transaction waits indefinitely.
 
 ```postgresql
 show lock_timeout;
@@ -180,7 +180,7 @@ Postgres guarantees that non-repeatable and phantom read anomalies are impossibl
 
 ##### Multi Version Concurrency Control(MVCC)
 
-Postgres uses MVCC(Multi-Version Concurrency Control) to implement repeatable read isolation levels. MVCC creates a new version, i.e., a snapshot of a row when it is updated. The old version is retained and is visible to transactions that started before the update. The new version is visible to transactions that initiate after the update.
+Postgres uses MVCC[^2](Multi-Version Concurrency Control) to implement repeatable read isolation levels. MVCC creates a new version, i.e., a snapshot of a row when it is updated. The old version is retained and is visible to transactions that started before the update. The new version is visible to transactions that initiate after the update.
 
 ##### Detecting Lost Updates
 
@@ -277,9 +277,13 @@ However, due to performance cost, a large portion of retry overhead makes it les
 
 ## Follow up
 
-If you have any questions, feel free to reach out to me on [X](https://twitter.com/_dineshgowda) or comment below.
+If you have any questions, feel free to reach out to me on X[^3] or comment below.
 
 **Update**: *The post was featured on few newletters.*
 
 {{< tweet user="ModernSQL" id="1708732428305498182" >}}
 {{< tweet user="eatonphil" id="1707485078870163614" >}}
+
+[^1]: https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-LOCK-TIMEOUT
+[^2]: https://en.wikipedia.org/wiki/Multiversion_concurrency_control
+[^3]: https://twitter.com/_dineshgowda
